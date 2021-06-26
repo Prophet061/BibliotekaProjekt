@@ -13,6 +13,7 @@ namespace BibliotekaProjekt
 {
     public partial class Bibliotekarze : Form
     {
+        int i;
 
         MySqlConnection sqlCon = new MySqlConnection();
         MySqlCommand sqlCmd = new MySqlCommand();
@@ -109,6 +110,8 @@ namespace BibliotekaProjekt
 
         private void button3_Click(object sender, EventArgs e)
         {
+            i = Convert.ToInt32(widokBibliotekarze.SelectedRows[0].Cells[0].Value);
+
             sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
 
             sqlCon.Open();
@@ -121,11 +124,11 @@ namespace BibliotekaProjekt
                 sqlCmd.CommandText = "Update Bibliotekarzetbl set Imie=@Imie, Nazwisko=@Nazwisko, Hasło=@Hasło, Telefon=@Telefon where idBibliotekarz=@idBibliotekarz";
 
                 sqlCmd.CommandType = CommandType.Text;
+                sqlCmd.Parameters.AddWithValue("@idBibliotekarz", i);
                 sqlCmd.Parameters.AddWithValue("@Imie", bibliotekarzImie.Text);
                 sqlCmd.Parameters.AddWithValue("@Nazwisko", bibliotekarzNazwisko.Text);
                 sqlCmd.Parameters.AddWithValue("@Hasło", bibliotekarzHaslo.Text);
                 sqlCmd.Parameters.AddWithValue("@Telefon", bibliotekarzTel.Text);
-                sqlCmd.Parameters.AddWithValue("@idBibliotekarz", widokBibliotekarze.SelectedCells);
 
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();
