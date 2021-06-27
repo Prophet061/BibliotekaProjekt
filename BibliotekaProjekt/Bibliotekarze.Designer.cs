@@ -83,6 +83,7 @@ namespace BibliotekaProjekt
             this.bibliotekarzImie.Name = "bibliotekarzImie";
             this.bibliotekarzImie.Size = new System.Drawing.Size(153, 23);
             this.bibliotekarzImie.TabIndex = 41;
+            this.bibliotekarzImie.TextChanged += new System.EventHandler(this.bibliotekarzImie_TextChanged);
             // 
             // button4
             // 
@@ -118,6 +119,7 @@ namespace BibliotekaProjekt
             this.widokBibliotekarze.Size = new System.Drawing.Size(506, 382);
             this.widokBibliotekarze.TabIndex = 37;
             this.widokBibliotekarze.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellClick);
+            this.widokBibliotekarze.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellContentClick);
             // 
             // button3
             // 

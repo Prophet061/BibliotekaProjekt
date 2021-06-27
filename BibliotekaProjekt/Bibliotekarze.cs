@@ -163,17 +163,21 @@ namespace BibliotekaProjekt
         private void button1_Click(object sender, EventArgs e)
         {
 
-
+            i = Convert.ToInt32(widokBibliotekarze.SelectedRows[0].Cells[0].Value);
 
             sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
 
+            
+
             sqlCon.Open();
+            sqlQuery = "delete from Bibliotekarzetbl where idBibliotekarz=@idBibliotekarz";
 
-            sqlCmd.Connection = sqlCon;
-
-            sqlCmd.CommandText = "delete from Bibliotekarzetbl where idBibliotekarz=@idBibliotekarz";
             sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
+            sqlCmd.Parameters.AddWithValue("@idBibliotekarz", i);
+            
+            sqlCmd.ExecuteNonQuery();
             sqlCon.Close();
+
             foreach (DataGridViewRow item in this.widokBibliotekarze.SelectedRows)
             {
                 widokBibliotekarze.Rows.RemoveAt(item.Index);
@@ -181,65 +185,18 @@ namespace BibliotekaProjekt
 
 
 
-
-            //sqlCon.Open();
-            //sqlCmd.Connection = sqlCon;
-            //string deleteQuery = "delete from Bibliotekarzetbl where id = " + int.Parse
-            //(bibliotekarzImie.Text);
+            upLoadData();
 
 
+        }
 
-            //upLoadData();
+        private void bibliotekarzImie_TextChanged(object sender, EventArgs e)
+        {
 
+        }
 
-
-            //foreach (DataGridViewCell oneCell in widokBibliotekarze.SelectedCells)
-            //{
-            //    if (oneCell.Selected == false) continue;
-
-            //    string i = widokBibliotekarze.SelectedRows[0].Cells[1].Value.ToString();
-            //    widokBibliotekarze.Rows.RemoveAt(oneCell.RowIndex);
-            //    string query = "DELETE FROM Bibliotekarzetbl WHERE idBibliotekarze='" + i + "'";
-
-
-            //    {
-            //        using (var cmd = new MySqlCommand(query, sqlCon))
-            //        {
-            //            sqlCon.Open();
-            //            sqlCmd.ExecuteNonQuery();
-            //            sqlCon.Close();
-            //        }
-            //    }
-            //}
-
-
-            //try
-            //{
-            //    sqlCon.Open();
-            //    MySqlCommand sqlCmd = new MySqlCommand();
-            //    sqlCmd.Connection = sqlCon;
-
-            //    sqlCmd.CommandText = "delete from Bibliotekarzetbl where idBibliotekarz";
-            //    sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
-
-            //    foreach (DataGridViewRow item in this.widokBibliotekarze.SelectedRows)
-            //    {
-            //        widokBibliotekarze.Rows.RemoveAt(item.Index);
-            //    }
-
-            //    sqlCmd.ExecuteNonQuery();
-            //    sqlCon.Close();
-            //    upLoadData();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-
-
-
+        private void widokBibliotekarze_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
