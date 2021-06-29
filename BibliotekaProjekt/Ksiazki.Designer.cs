@@ -112,6 +112,7 @@ namespace BibliotekaProjekt
             this.widokKsiazki.Size = new System.Drawing.Size(422, 382);
             this.widokKsiazki.TabIndex = 21;
             this.widokKsiazki.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.widokKsiazki.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokKsiazki_CellContentClick);
             // 
             // button3
             // 

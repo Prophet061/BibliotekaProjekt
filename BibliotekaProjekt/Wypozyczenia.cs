@@ -26,6 +26,9 @@ namespace BibliotekaProjekt
         String username = "33700168_programowanie";
         String password = "c6cBK3cQ";
         String database = "33700168_programowanie";
+        public static string OPTION = "Convert Zero Datetime=True";
+
+
 
 
         public Wypozyczenia()
@@ -35,7 +38,7 @@ namespace BibliotekaProjekt
 
         private void upLoadData()
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database + ";" + OPTION + ";";
 
             sqlCon.Open();
             sqlCmd.Connection = sqlCon;
@@ -78,5 +81,105 @@ namespace BibliotekaProjekt
         {
             
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            i = Convert.ToInt32(widokWypozyczenia.SelectedRows[0].Cells[0].Value);
+
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+
+
+            sqlCon.Open();
+            sqlQuery = "delete from Wypozyczeniatbl where idWypozyczenia=@idWypozyczenia";
+
+            sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
+            sqlCmd.Parameters.AddWithValue("@idWypozyczenia", i);
+
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+            foreach (DataGridViewRow item in this.widokWypozyczenia.SelectedRows)
+            {
+                widokWypozyczenia.Rows.RemoveAt(item.Index);
+            }
+
+
+
+            upLoadData();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //DateTime theDate = DateTime.Now;
+            //theDate.ToString("yyyy-MM-dd");
+            //string strDate = dataWyp.Value.ToString("yyyy/MM/dd");
+            //string strDate1 = dataOdb.Value.ToString("yyyy/MM/dd");
+            i = Convert.ToInt32(widokWypozyczenia.SelectedRows[0].Cells[0].Value);
+
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+            sqlCon.Open();
+
+            try
+            {
+                MySqlCommand sqlCmd = new MySqlCommand();
+                sqlCmd.Connection = sqlCon;
+
+                sqlCmd.CommandText = "Update Wypozyczeniatbl set idKsiazka=@idKsiazka, idCzytelnik=@idCzytelnik, osobaWypozyczajaca=@osobaWypozyczajaca, osobaOdbierajaca=@osobaOdbierajaca, dataWypozyczenia=@dataWypozyczenia, dataOdbioru=@dataOdbioru where idWypozyczenia=@idWypozyczenia";
+
+                sqlCmd.CommandType = CommandType.Text;
+                sqlCmd.Parameters.AddWithValue("@idWypozyczenia", i);
+                sqlCmd.Parameters.AddWithValue("@idKsiazka", idKsiazki.Text);
+                sqlCmd.Parameters.AddWithValue("@idCzytelnik", idCzytelnika.Text);
+                sqlCmd.Parameters.AddWithValue("@osobaWypozyczajaca", osobaWyp.Text);
+                sqlCmd.Parameters.AddWithValue("@osobaOdbierajaca", osobaOdb.Text);
+                sqlCmd.Parameters.AddWithValue("@dataWypozyczenia", dataWyp.Text);
+                sqlCmd.Parameters.AddWithValue("@dataOdbioru", dataOdb.Text);
+
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+                upLoadData();
+
+            }
+
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+            try
+            {
+                sqlCon.Open();
+                sqlQuery = "insert into Wypozyczeniatbl (idKsiazka, idCzytelnik, osobaWypozyczajaca, osobaOdbierajaca, dataWypozyczenia, dataOdbioru)" +
+                "values('" + idKsiazki.Text + "', '" + idCzytelnika.Text + "', '" +
+                osobaWyp.Text + "','" + osobaOdb.Text + "','" + this.dataWyp.Text + "','" + this.dataOdb.Text + "')";
+
+                sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
+                sqlRead = sqlCmd.ExecuteReader();
+
+                sqlCon.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+            upLoadData();
+        }
     }
-}
+    }
+ 
+
+

@@ -175,5 +175,10 @@ namespace BibliotekaProjekt
             upLoadData();
 
         }
+
+        private void widokKsiazki_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
