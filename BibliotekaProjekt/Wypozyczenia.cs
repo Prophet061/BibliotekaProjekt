@@ -178,6 +178,11 @@ namespace BibliotekaProjekt
             }
             upLoadData();
         }
+
+        private void widokWypozyczenia_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
     }
  

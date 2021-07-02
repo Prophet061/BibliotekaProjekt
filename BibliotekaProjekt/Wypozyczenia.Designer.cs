@@ -108,6 +108,7 @@ namespace BibliotekaProjekt
             this.widokWypozyczenia.Size = new System.Drawing.Size(370, 382);
             this.widokWypozyczenia.TabIndex = 37;
             this.widokWypozyczenia.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.widokWypozyczenia.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokWypozyczenia_CellContentClick);
             // 
             // button3
             // 
