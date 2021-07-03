@@ -75,7 +75,6 @@ namespace BibliotekaProjekt
             Parameters.Add("Telefon", bibliotekarzTel.Text);
 
             int result = db.Exec("INSERT INTO Bibliotekarz (Imie, Nazwisko, Login, Haslo, Telefon) VALUES (@Imie, @Nazwisko, @Login, @Haslo, @Telefon)", Parameters);
-            loadData();
 
             if (result > 0)
             {

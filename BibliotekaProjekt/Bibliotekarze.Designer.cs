@@ -246,7 +246,6 @@ namespace BibliotekaProjekt
         private System.Windows.Forms.TextBox bibliotekarzImie;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView widokBibliotekarze;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button bibliotekarzDeleteButton;
         private System.Windows.Forms.Label labelHaslo;
         private System.Windows.Forms.Label labelNazwisko;
@@ -255,6 +254,5 @@ namespace BibliotekaProjekt
         private System.Windows.Forms.Label labelLogin;
         private System.Windows.Forms.Button bibliotekarzAddButton;
         private System.Windows.Forms.Button bibliotekarzActionButton;
-        private System.Windows.Forms.Label label4;
     }
 }
