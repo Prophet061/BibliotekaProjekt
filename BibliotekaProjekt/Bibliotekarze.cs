@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -60,16 +56,6 @@ namespace BibliotekaProjekt
             StronaGlowna stronaglowna = new StronaGlowna();
             stronaglowna.Show();
             this.Hide();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Bibliotekarze_Load(object sender, EventArgs e)

@@ -10,6 +10,19 @@ namespace BibliotekaProjekt
 {
     public partial class StronaGlowna : Form
     {
+        private int UserId = 0;
+
+        public void setUserId(int id)
+        {
+            UserId = id;
+            useridlabel.Text = Convert.ToString(id);
+        }
+
+        public int getUserId()
+        {
+            return UserId;
+        }
+
         public StronaGlowna()
         {
             InitializeComponent();
