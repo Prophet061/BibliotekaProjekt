@@ -11,22 +11,7 @@ namespace BibliotekaProjekt
 {
     public partial class Czytelnicy : Form
     {
-        int i;
-
-        MySqlConnection sqlCon = new MySqlConnection();
-        MySqlCommand sqlCmd = new MySqlCommand();
-        DataTable sqlDt = new DataTable();
-        String sqlQuery;
-        MySqlDataAdapter DtA = new MySqlDataAdapter();
-        MySqlDataReader sqlRead;
-
-        DataSet DS = new DataSet();
-
-        String server = "sql.serwer2077031.home.pl";
-        String username = "33700168_programowanie";
-        String password = "c6cBK3cQ";
-        String database = "33700168_programowanie";
-
+        string currentEdit = "";
 
         public Czytelnicy()
         {
@@ -42,7 +27,7 @@ namespace BibliotekaProjekt
         private void loadData()
         {
 
-            //widokCzytelnicy.SelectionChanged -= new System.EventHandler(this.widokBibliotekarze_SelectionChanged);
+            widokCzytelnicy.SelectionChanged -= new System.EventHandler(this.widokCzytelnicy_SelectionChanged);
 
             Database db = new Database();
             Dictionary<string, string> Parameters = new Dictionary<string, string>();
@@ -58,21 +43,8 @@ namespace BibliotekaProjekt
                 widokCzytelnicy.Columns[3].HeaderText = "Telefon";
 
                 widokCzytelnicy.ClearSelection();
-                //widokBibliotekarze.SelectionChanged += new System.EventHandler(this.widokBibliotekarze_SelectionChanged);
+                widokCzytelnicy.SelectionChanged += new System.EventHandler(this.widokCzytelnicy_SelectionChanged);
             }
-
-
-
-            //sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
-
-            //sqlCon.Open();
-            //sqlCmd.Connection = sqlCon;
-            //sqlCmd.CommandText = "SELECT * FROM Czytelnicytbl";
-            //sqlRead = sqlCmd.ExecuteReader();
-            //sqlDt.Load(sqlRead);
-            //sqlRead.Close();
-            //sqlCon.Close();
-            //widokCzytelnicy.DataSource = sqlDt;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -82,105 +54,143 @@ namespace BibliotekaProjekt
             this.Hide();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            i = Convert.ToInt32(widokCzytelnicy.SelectedRows[0].Cells[0].Value);
-
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
-
-            sqlCon.Open();
-
-            try
-            {
-                MySqlCommand sqlCmd = new MySqlCommand();
-                sqlCmd.Connection = sqlCon;
-
-                sqlCmd.CommandText = "Update Czytelnicytbl set Imie=@Imie, Nazwisko=@Nazwisko, NumerTelefonu=@NumerTelefonu where idCzytelnik=@idCzytelnik";
-
-                sqlCmd.CommandType = CommandType.Text;
-                sqlCmd.Parameters.AddWithValue("@idCzytelnik", i);
-                sqlCmd.Parameters.AddWithValue("@Imie", czytelnikImie.Text);
-                sqlCmd.Parameters.AddWithValue("@Nazwisko", czytelnikNazwisko.Text);
-                sqlCmd.Parameters.AddWithValue("@NumerTelefonu", czytelnikTel.Text);
-
-                sqlCmd.ExecuteNonQuery();
-                sqlCon.Close();
-                loadData();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+        //dodaj w sensie sama zmiana w formularzu
         private void button2_Click(object sender, EventArgs e)
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            labelImie.Visible = true;
+            czytelnikImie.Visible = true;
+            czytelnikImie.Text = "";
 
-            try
-            {
-                sqlCon.Open();
-                sqlQuery = "insert into Czytelnicytbl (Imie, Nazwisko, NumerTelefonu)" +
-                "values('" + czytelnikImie.Text + "', '" + czytelnikNazwisko.Text + "', '" +
-                 czytelnikTel.Text + "')";
+            labelNazwisko.Visible = true;
+            czytelnikNazwisko.Visible = true;
+            czytelnikNazwisko.Text = "";
 
-                sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
-                sqlRead = sqlCmd.ExecuteReader();
+            labelTelefon.Visible = true;
+            czytelnikTel.Visible = true;
+            czytelnikTel.Text = "";
 
-                sqlCon.Close();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                sqlCon.Close();
-            }
+            czytelnikActionButton.Visible = true;
+            czytelnikActionButton.Text = "Dodaj";
+            czytelnikActionButton.Click += new System.EventHandler(createNew);
+            czytelnikActionButton.Click -= new System.EventHandler(edit);
+        }
+
+        private void czytelnicyEditButton_Click()
+        {
+            labelImie.Visible = true;
+            czytelnikImie.Visible = true;
+            czytelnikImie.Text = widokCzytelnicy.SelectedRows[0].Cells[1].Value.ToString();
+
+            labelNazwisko.Visible = true;
+            czytelnikNazwisko.Visible = true;
+            czytelnikNazwisko.Text = widokCzytelnicy.SelectedRows[0].Cells[2].Value.ToString();
+
+            labelTelefon.Visible = true;
+            czytelnikTel.Visible = true;
+            czytelnikTel.Text = widokCzytelnicy.SelectedRows[0].Cells[3].Value.ToString();
+
+
+            czytelnikActionButton.Visible = true;
+            czytelnikActionButton.Text = "Zapisz zmiany";
+            czytelnikActionButton.Click -= new System.EventHandler(createNew);
+            czytelnikActionButton.Click += new System.EventHandler(edit);
+        }
+
+        private void createNew(object sender, EventArgs e)
+        {
+            Database db = new Database();
+
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("Imie", czytelnikImie.Text);
+            Parameters.Add("Nazwisko", czytelnikNazwisko.Text);
+            Parameters.Add("Telefon", czytelnikTel.Text);
+
+            int result = db.Exec("INSERT INTO Czytelnik (Imie, Nazwisko, Telefon) VALUES (@Imie, @Nazwisko, @Telefon)", Parameters);
             loadData();
+
+            if (result > 0)
+            {
+                czytelnikImie.Text = "";
+                czytelnikNazwisko.Text = "";
+                czytelnikTel.Text = "";
+
+                MessageBox.Show("Pomyślnie dodano nowego czytelnika");
+            }
+
+            loadData();
+        }
+
+        private void edit(object sender, EventArgs e)
+        {
+            Database db = new Database();
+
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("Imie", czytelnikImie.Text);
+            Parameters.Add("Nazwisko", czytelnikNazwisko.Text);
+            Parameters.Add("Telefon", czytelnikTel.Text);
+            Parameters.Add("id", currentEdit);
+
+            int result = db.Exec("UPDATE Czytelnik SET Imie=@Imie, Nazwisko=@Nazwisko, Telefon=@Telefon WHERE idCzytelnik=@id", Parameters);
+
+            if (result > 0)
+            {
+                MessageBox.Show("Czytelnik został zaktualizowany");
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się zaktualizować czytelnika");
+            }
+
+            loadData();
+        }
+
+        private void widokCzytelnicy_SelectionChanged(object sender, EventArgs e)
+        {
+            if (widokCzytelnicy.SelectedRows.Count > 0)
+            {
+                currentEdit = widokCzytelnicy.SelectedRows[0].Cells[0].Value.ToString();
+                czytelnicyEditButton_Click();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            i = Convert.ToInt32(widokCzytelnicy.SelectedRows[0].Cells[0].Value);
+            Database db = new Database();
 
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("id", currentEdit);
 
+            int result = db.Exec("DELETE FROM Czytelnik WHERE idCzytelnik=@id", Parameters);
 
-
-            sqlCon.Open();
-            sqlQuery = "delete from Czytelnicytbl where idCzytelnik=@idCzytelnik";
-
-            sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
-            sqlCmd.Parameters.AddWithValue("@idCzytelnik", i);
-
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
-
-            foreach (DataGridViewRow item in this.widokCzytelnicy.SelectedRows)
+            if (result > 0)
             {
-                widokCzytelnicy.Rows.RemoveAt(item.Index);
+                MessageBox.Show("Czytelnik został usunięty");
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się usunąć czytelnika");
             }
 
-
-
+            hideForm(this, null);
             loadData();
         }
 
-        private void widokCzytelnicy_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void hideForm(object sender, EventArgs e)
         {
-            try
-            {
-                czytelnikImie.Text = widokCzytelnicy.SelectedRows[0].Cells[1].Value.ToString();
-                czytelnikNazwisko.Text = widokCzytelnicy.SelectedRows[0].Cells[2].Value.ToString();
-                czytelnikTel.Text = widokCzytelnicy.SelectedRows[0].Cells[3].Value.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            labelImie.Visible = false;
+            czytelnikImie.Visible = false;
+            czytelnikImie.Text = "";
+
+            labelNazwisko.Visible = false;
+            czytelnikNazwisko.Visible = false;
+            czytelnikNazwisko.Text = "";
+
+            labelTelefon.Visible = false;
+            czytelnikTel.Visible = false;
+            czytelnikTel.Text = "";
+
+            czytelnikActionButton.Visible = false;
         }
     }
 }
