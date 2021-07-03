@@ -14,7 +14,7 @@ namespace BibliotekaProjekt
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Bibliotekarze());
+            Application.Run(new StronaGlowna());
         }
     }
 }
