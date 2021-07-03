@@ -40,9 +40,9 @@ namespace BibliotekaProjekt
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(93, 114);
+            this.button1.Location = new System.Drawing.Point(93, 101);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 82);
+            this.button1.Size = new System.Drawing.Size(123, 72);
             this.button1.TabIndex = 0;
             this.button1.Text = "Czytelnicy";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@ namespace BibliotekaProjekt
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(222, 114);
+            this.button2.Location = new System.Drawing.Point(222, 101);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 82);
+            this.button2.Size = new System.Drawing.Size(123, 72);
             this.button2.TabIndex = 1;
             this.button2.Text = "Książki";
             this.button2.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@ namespace BibliotekaProjekt
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(351, 114);
+            this.button3.Location = new System.Drawing.Point(351, 101);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(123, 82);
+            this.button3.Size = new System.Drawing.Size(123, 72);
             this.button3.TabIndex = 2;
             this.button3.Text = "Bibliotekarze";
             this.button3.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@ namespace BibliotekaProjekt
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(620, 114);
+            this.button4.Location = new System.Drawing.Point(620, 101);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(123, 82);
+            this.button4.Size = new System.Drawing.Size(123, 72);
             this.button4.TabIndex = 3;
             this.button4.Text = "Tworcy";
             this.button4.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@ namespace BibliotekaProjekt
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 10);
+            this.button6.Location = new System.Drawing.Point(12, 9);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(93, 60);
+            this.button6.Size = new System.Drawing.Size(93, 53);
             this.button6.TabIndex = 5;
             this.button6.Text = "Wyloguj się";
             this.button6.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@ namespace BibliotekaProjekt
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(480, 114);
+            this.button7.Location = new System.Drawing.Point(480, 101);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(123, 82);
+            this.button7.Size = new System.Drawing.Size(123, 72);
             this.button7.TabIndex = 6;
             this.button7.Text = "Wypożyczenia";
             this.button7.UseVisualStyleBackColor = true;
@@ -101,17 +101,17 @@ namespace BibliotekaProjekt
             // useridlabel
             // 
             this.useridlabel.AutoSize = true;
-            this.useridlabel.Location = new System.Drawing.Point(379, 376);
+            this.useridlabel.Location = new System.Drawing.Point(379, 332);
             this.useridlabel.Name = "useridlabel";
-            this.useridlabel.Size = new System.Drawing.Size(43, 17);
+            this.useridlabel.Size = new System.Drawing.Size(38, 15);
             this.useridlabel.TabIndex = 7;
             this.useridlabel.Text = "label1";
             // 
             // StronaGlowna
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(909, 547);
+            this.ClientSize = new System.Drawing.Size(909, 483);
             this.Controls.Add(this.useridlabel);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -122,6 +122,7 @@ namespace BibliotekaProjekt
             this.Name = "StronaGlowna";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StronaGlowna";
+            this.Load += new System.EventHandler(this.StronaGlowna_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

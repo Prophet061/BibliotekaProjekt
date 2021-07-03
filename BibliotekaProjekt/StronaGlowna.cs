@@ -78,6 +78,9 @@ namespace BibliotekaProjekt
             this.Hide();
         }
 
-        
+        private void StronaGlowna_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
