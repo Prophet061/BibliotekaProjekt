@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -9,119 +10,241 @@ namespace BibliotekaProjekt
 {
     public partial class Bibliotekarze : Form
     {
-
-        MySqlConnection sqlCon = new MySqlConnection();
-        MySqlCommand sqlCmd = new MySqlCommand();
-        DataTable sqlDt = new DataTable();
-        String sqlQuery;
-        MySqlDataAdapter DtA = new MySqlDataAdapter();
-        MySqlDataReader sqlRead;
-
-        DataSet DS = new DataSet();
-
-        String server = "sql.serwer2077031.home.pl";
-        String username = "33700168_programowanie";
-        String password = "c6cBK3cQ";
-        String database = "33700168_programowanie";
-
+        public string currentEdit = "";
 
         public Bibliotekarze()
         {
             InitializeComponent();
         }
 
-        private void upLoadData()
+        private void loadData()
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            widokBibliotekarze.SelectionChanged -= new System.EventHandler(this.widokBibliotekarze_SelectionChanged);
 
-            sqlCon.Open();
-            sqlCmd.Connection = sqlCon;
-            sqlCmd.CommandText = "SELECT * FROM Bibliotekarzetbl";
-            sqlRead = sqlCmd.ExecuteReader();
-            sqlDt.Load(sqlRead);
-            sqlRead.Close();
-            sqlCon.Close();
-            widokBibliotekarze.DataSource = sqlDt;
+            Database db = new Database();
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+
+            DataTable data = db.Query("SELECT idBibliotekarz,Login,Imie,Nazwisko,Telefon FROM Bibliotekarz", Parameters);
+
+            widokBibliotekarze.DataSource = data;
+            if(data != null && data.Rows.Count > 0)
+            {
+                widokBibliotekarze.Columns[0].HeaderText = "ID";
+                widokBibliotekarze.Columns[1].HeaderText = "Nazwa użytkownika";
+                widokBibliotekarze.Columns[2].HeaderText = "Imię";
+                widokBibliotekarze.Columns[3].HeaderText = "Nazwisko";
+                widokBibliotekarze.Columns[4].HeaderText = "Telefon";
+
+                widokBibliotekarze.ClearSelection();
+                widokBibliotekarze.SelectionChanged += new System.EventHandler(this.widokBibliotekarze_SelectionChanged);
+            }
+
         }
 
-
-
-
-
-
-
-
+        //powrot na glowna
         private void button4_Click(object sender, EventArgs e)
         {
-            StronaGlowna stronaglowna = new StronaGlowna();
-            stronaglowna.Show();
+            (new StronaGlowna()).Show();
             this.Hide();
         }
 
         private void Bibliotekarze_Load(object sender, EventArgs e)
         {
-            upLoadData();
-           
+            loadData();
         }
 
-        
-        private void button2_Click(object sender, EventArgs e)
+        private void widokBibliotekarze_SelectionChanged(object sender, EventArgs e)
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
-
-            try
+            if (widokBibliotekarze.SelectedRows.Count > 0)
             {
-                sqlCon.Open();
-                sqlQuery = "insert into Bibliotekarzetbl (Imie, Nazwisko, Hasło, Telefon)" + 
-                "values('" + bibliotekarzImie.Text + "', '" + bibliotekarzNazwisko.Text + "', '" +
-                bibliotekarzHaslo.Text + "','" + bibliotekarzTel.Text + "')";
-
-                sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
-                sqlRead = sqlCmd.ExecuteReader();
-
-                sqlCon.Close();
-
+                currentEdit = widokBibliotekarze.SelectedRows[0].Cells[0].Value.ToString();
+                bibliotekarzEditButton_Click();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                sqlCon.Close();
-            }
-            upLoadData();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        //dodaj nowego
+        private void createNew(object sender, EventArgs e)
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            Database db = new Database();
 
-            sqlCon.Open();
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("Imie", bibliotekarzImie.Text);
+            Parameters.Add("Nazwisko", bibliotekarzNazwisko.Text);
+            Parameters.Add("Login", bibliotekarzLogin.Text);
+            Parameters.Add("Haslo", bibliotekarzHaslo.Text);
+            Parameters.Add("Telefon", bibliotekarzTel.Text);
 
-            try
+            int result = db.Exec("INSERT INTO Bibliotekarz (Imie, Nazwisko, Login, Haslo, Telefon) VALUES (@Imie, @Nazwisko, @Login, @Haslo, @Telefon)", Parameters);
+            loadData();
+
+            if (result > 0)
             {
-                MySqlCommand sqlCmd = new MySqlCommand();
-                sqlCmd.Connection = sqlCon;
+                bibliotekarzImie.Text = "";
+                bibliotekarzNazwisko.Text = "";
+                bibliotekarzLogin.Text = "";
+                bibliotekarzHaslo.Text = "";
+                bibliotekarzTel.Text = "";
 
-                sqlCmd.CommandText = "Update Bibliotekarzetbl set Imie=@Imie, Nazwisko=@Nazwisko, Hasło=@Hasło, Telefon=@Telefon where idBibliotekarz=@idBibliotekarz";
-
-                sqlCmd.CommandType = CommandType.Text;
-                sqlCmd.Parameters.AddWithValue("@Imie", bibliotekarzImie.Text);
-                sqlCmd.Parameters.AddWithValue("@Nazwisko", bibliotekarzNazwisko.Text);
-                sqlCmd.Parameters.AddWithValue("@Hasło", bibliotekarzHaslo.Text);
-                sqlCmd.Parameters.AddWithValue("@Telefon", bibliotekarzTel.Text);
-                sqlCmd.Parameters.AddWithValue("@idBibliotekarz", widokBibliotekarze.SelectedCells);
-
-                sqlCmd.ExecuteNonQuery();
-                sqlCon.Close();
-                upLoadData();
-
+                MessageBox.Show("Pomyślnie dodano nowego bibliotekarza");
             }
-            catch (Exception ex)
+
+            loadData();
+        }
+
+        //edytuj istniejacego
+        private void edit(object sender, EventArgs e)
+        {
+            Database db = new Database();
+
+            if(bibliotekarzHaslo.TextLength > 0)
             {
-                MessageBox.Show(ex.Message);
+                Dictionary<string, string> Parameters = new Dictionary<string, string>();
+                Parameters.Add("Imie", bibliotekarzImie.Text);
+                Parameters.Add("Nazwisko", bibliotekarzNazwisko.Text);
+                Parameters.Add("Login", bibliotekarzLogin.Text);
+                Parameters.Add("Haslo", bibliotekarzHaslo.Text);
+                Parameters.Add("Telefon", bibliotekarzTel.Text);
+                Parameters.Add("id", currentEdit);
+
+                int result = db.Exec("UPDATE Bibliotekarz SET Imie=@Imie, Nazwisko=@Nazwisko, Login=@Login, Haslo=@Haslo, Telefon=@Telefon WHERE idBibliotekarz=@id", Parameters);
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Bibliotekarz został zaktualizowany");
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zaktualizować bibliotekarza");
+                }
             }
+            else
+            {
+                Dictionary<string, string> Parameters = new Dictionary<string, string>();
+                Parameters.Add("Imie", bibliotekarzImie.Text);
+                Parameters.Add("Nazwisko", bibliotekarzNazwisko.Text);
+                Parameters.Add("Login", bibliotekarzLogin.Text);
+                Parameters.Add("Telefon", bibliotekarzTel.Text);
+                Parameters.Add("id", currentEdit);
+
+                int result = db.Exec("UPDATE Bibliotekarz SET Imie=@Imie, Nazwisko=@Nazwisko, Login=@Login, Telefon=@Telefon WHERE idBibliotekarz=@id", Parameters);
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Bibliotekarz został zaktualizowany");
+                }
+                else
+                {
+                    MessageBox.Show("Nie udało się zaktualizować bibliotekarza");
+                }
+            }
+
+
+
+            loadData();
+        }
+
+        private void bibliotekarzDeleteButton_Click(object sender, EventArgs e)
+        {
+            Database db = new Database();
+
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("id", currentEdit);
+
+            int result = db.Exec("DELETE FROM Bibliotekarz WHERE idBibliotekarz=@id", Parameters);
+
+            if (result > 0)
+            {
+                MessageBox.Show("Bibliotekarz został usunięty");
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się usunąć bibliotekarza");
+            }
+
+            hideForm(this, null);
+            loadData();
+        }
+
+        private void bibliotekarzAddButton_Click(object sender, EventArgs e)
+        {
+            labelImie.Visible = true;
+            bibliotekarzImie.Visible = true;
+            bibliotekarzImie.Text = "";
+
+            labelNazwisko.Visible = true;
+            bibliotekarzNazwisko.Visible = true;
+            bibliotekarzNazwisko.Text = "";
+
+            labelLogin.Visible = true;
+            bibliotekarzLogin.Visible = true;
+            bibliotekarzLogin.Text = "";
+
+            labelHaslo.Visible = true;
+            bibliotekarzHaslo.Visible = true;
+            bibliotekarzHaslo.Text = "";
+
+            labelTelefon.Visible = true;
+            bibliotekarzTel.Visible = true;
+            bibliotekarzTel.Text = "";
+
+            bibliotekarzActionButton.Visible = true;
+            bibliotekarzActionButton.Text = "Dodaj nowego bibliotekarza";
+            bibliotekarzActionButton.Click -= new System.EventHandler(edit);
+            bibliotekarzActionButton.Click += new System.EventHandler(createNew);
+        }
+
+        private void hideForm(object sender, EventArgs e)
+        {
+            labelImie.Visible = false;
+            bibliotekarzImie.Visible = false;
+            bibliotekarzImie.Text = "";
+
+            labelNazwisko.Visible = false;
+            bibliotekarzNazwisko.Visible = false;
+            bibliotekarzNazwisko.Text = "";
+
+            labelLogin.Visible = false;
+            bibliotekarzLogin.Visible = false;
+            bibliotekarzLogin.Text = "";
+
+            labelHaslo.Visible = false;
+            bibliotekarzHaslo.Visible = false;
+            bibliotekarzHaslo.Text = "";
+
+            labelTelefon.Visible = false;
+            bibliotekarzTel.Visible = false;
+            bibliotekarzTel.Text = "";
+
+            bibliotekarzActionButton.Visible = false;
+        }
+
+        private void bibliotekarzEditButton_Click()
+        {
+            labelImie.Visible = true;
+            bibliotekarzImie.Visible = true;
+            bibliotekarzImie.Text = widokBibliotekarze.SelectedRows[0].Cells[2].Value.ToString();
+
+            labelNazwisko.Visible = true;
+            bibliotekarzNazwisko.Visible = true;
+            bibliotekarzNazwisko.Text = widokBibliotekarze.SelectedRows[0].Cells[3].Value.ToString();
+
+            labelLogin.Visible = true;
+            bibliotekarzLogin.Visible = true;
+            bibliotekarzLogin.Text = widokBibliotekarze.SelectedRows[0].Cells[1].Value.ToString();
+
+
+            labelHaslo.Visible = true;
+            bibliotekarzHaslo.Visible = true;
+
+            labelTelefon.Visible = true;
+            bibliotekarzTel.Visible = true;
+            bibliotekarzTel.Text = widokBibliotekarze.SelectedRows[0].Cells[4].Value.ToString();
+
+
+            bibliotekarzActionButton.Visible = true;
+            bibliotekarzActionButton.Text = "Zapisz zmiany";
+            bibliotekarzActionButton.Click -= new System.EventHandler(createNew);
+            bibliotekarzActionButton.Click += new System.EventHandler(edit);
         }
     }
 }

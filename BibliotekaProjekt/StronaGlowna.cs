@@ -15,7 +15,6 @@ namespace BibliotekaProjekt
         public void setUserId(int id)
         {
             UserId = id;
-            useridlabel.Text = Convert.ToString(id);
         }
 
         public int getUserId()
@@ -26,6 +25,7 @@ namespace BibliotekaProjekt
         public StronaGlowna()
         {
             InitializeComponent();
+            //is.setUserId(3);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -78,6 +78,9 @@ namespace BibliotekaProjekt
             this.Hide();
         }
 
-        
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
