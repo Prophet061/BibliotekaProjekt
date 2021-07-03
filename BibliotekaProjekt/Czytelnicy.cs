@@ -33,26 +33,46 @@ namespace BibliotekaProjekt
             InitializeComponent();
         }
 
-        private void upLoadData()
+        private void Czytelnicy_Load(object sender, EventArgs e)
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
-
-            sqlCon.Open();
-            sqlCmd.Connection = sqlCon;
-            sqlCmd.CommandText = "SELECT * FROM Czytelnicytbl";
-            sqlRead = sqlCmd.ExecuteReader();
-            sqlDt.Load(sqlRead);
-            sqlRead.Close();
-            sqlCon.Close();
-            widokCzytelnicy.DataSource = sqlDt;
+            loadData();
         }
 
 
-
-
-        private void button5_Click(object sender, EventArgs e)
+        private void loadData()
         {
-            this.Close();
+
+            //widokCzytelnicy.SelectionChanged -= new System.EventHandler(this.widokBibliotekarze_SelectionChanged);
+
+            Database db = new Database();
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+
+            DataTable data = db.Query("SELECT * FROM Czytelnik", Parameters);
+
+            widokCzytelnicy.DataSource = data;
+            if (data != null && data.Rows.Count > 0)
+            {
+                widokCzytelnicy.Columns[0].HeaderText = "ID";
+                widokCzytelnicy.Columns[1].HeaderText = "Imię";
+                widokCzytelnicy.Columns[2].HeaderText = "Nazwisko";
+                widokCzytelnicy.Columns[3].HeaderText = "Telefon";
+
+                widokCzytelnicy.ClearSelection();
+                //widokBibliotekarze.SelectionChanged += new System.EventHandler(this.widokBibliotekarze_SelectionChanged);
+            }
+
+
+
+            //sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+            //sqlCon.Open();
+            //sqlCmd.Connection = sqlCon;
+            //sqlCmd.CommandText = "SELECT * FROM Czytelnicytbl";
+            //sqlRead = sqlCmd.ExecuteReader();
+            //sqlDt.Load(sqlRead);
+            //sqlRead.Close();
+            //sqlCon.Close();
+            //widokCzytelnicy.DataSource = sqlDt;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -60,31 +80,6 @@ namespace BibliotekaProjekt
             StronaGlowna stronaglowna = new StronaGlowna();
             stronaglowna.Show();
             this.Hide();
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -110,7 +105,7 @@ namespace BibliotekaProjekt
 
                 sqlCmd.ExecuteNonQuery();
                 sqlCon.Close();
-                upLoadData();
+                loadData();
 
             }
             catch (Exception ex)
@@ -144,7 +139,7 @@ namespace BibliotekaProjekt
             {
                 sqlCon.Close();
             }
-            upLoadData();
+            loadData();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -171,32 +166,7 @@ namespace BibliotekaProjekt
 
 
 
-            upLoadData();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Czytelnicy_Load(object sender, EventArgs e)
-        {
-            upLoadData();
+            loadData();
         }
 
         private void widokCzytelnicy_CellClick(object sender, DataGridViewCellEventArgs e)

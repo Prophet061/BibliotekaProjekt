@@ -14,11 +14,7 @@ namespace BibliotekaProjekt
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< HEAD
-            Application.Run(new Czytelnicy());
-=======
-            Application.Run(new Bibliotekarze());
->>>>>>> 3bc40f5b5a22278cb9486a7819e0142f79b2bff4
+            Application.Run(new StronaGlowna());
         }
     }
 }
