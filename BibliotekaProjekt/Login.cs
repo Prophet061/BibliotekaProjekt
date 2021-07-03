@@ -36,9 +36,9 @@ namespace BibliotekaProjekt
 
             Dictionary<string, string> Parameters = new Dictionary<string, string>();
             Parameters.Add("Login", login);
-            Parameters.Add("Hasło", password);
+            Parameters.Add("Haslo", password);
 
-            DataTable data = db.Query("SELECT * FROM Bibliotekarz WHERE Login=@Login AND Hasło=@Hasło", Parameters);
+            DataTable data = db.Query("SELECT * FROM Bibliotekarz WHERE Login=@Login AND Haslo=@Haslo", Parameters);
 
             try
             {
@@ -56,11 +56,6 @@ namespace BibliotekaProjekt
             } catch(Exception ex){
                 MessageBox.Show(ex.Message);
             }            
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
         }
     }
