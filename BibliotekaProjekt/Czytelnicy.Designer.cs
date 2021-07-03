@@ -29,33 +29,20 @@ namespace BibliotekaProjekt
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.widokCzytelnicy = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.czytelnikImie = new System.Windows.Forms.TextBox();
+            this.czytelnikNazwisko = new System.Windows.Forms.TextBox();
+            this.czytelnikTel = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.widokCzytelnicy)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(16, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 30);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Numer czytelnika";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -120,15 +107,19 @@ namespace BibliotekaProjekt
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // dataGridView1
+            // widokCzytelnicy
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(366, 56);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(422, 382);
-            this.dataGridView1.TabIndex = 7;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.widokCzytelnicy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.widokCzytelnicy.Location = new System.Drawing.Point(366, 56);
+            this.widokCzytelnicy.MultiSelect = false;
+            this.widokCzytelnicy.Name = "widokCzytelnicy";
+            this.widokCzytelnicy.RowHeadersVisible = false;
+            this.widokCzytelnicy.RowTemplate.Height = 25;
+            this.widokCzytelnicy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.widokCzytelnicy.Size = new System.Drawing.Size(422, 382);
+            this.widokCzytelnicy.TabIndex = 7;
+            this.widokCzytelnicy.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokCzytelnicy_CellClick);
+            this.widokCzytelnicy.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button5
             // 
@@ -152,81 +143,69 @@ namespace BibliotekaProjekt
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox1
+            // czytelnikImie
             // 
-            this.textBox1.Location = new System.Drawing.Point(196, 72);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(153, 23);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.czytelnikImie.Location = new System.Drawing.Point(196, 117);
+            this.czytelnikImie.Name = "czytelnikImie";
+            this.czytelnikImie.Size = new System.Drawing.Size(153, 23);
+            this.czytelnikImie.TabIndex = 11;
+            this.czytelnikImie.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // textBox2
+            // czytelnikNazwisko
             // 
-            this.textBox2.Location = new System.Drawing.Point(196, 117);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(153, 23);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.czytelnikNazwisko.Location = new System.Drawing.Point(196, 163);
+            this.czytelnikNazwisko.Name = "czytelnikNazwisko";
+            this.czytelnikNazwisko.Size = new System.Drawing.Size(153, 23);
+            this.czytelnikNazwisko.TabIndex = 12;
+            this.czytelnikNazwisko.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // textBox3
+            // czytelnikTel
             // 
-            this.textBox3.Location = new System.Drawing.Point(196, 163);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(153, 23);
-            this.textBox3.TabIndex = 12;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(196, 211);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(153, 23);
-            this.textBox4.TabIndex = 13;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.czytelnikTel.Location = new System.Drawing.Point(196, 211);
+            this.czytelnikTel.Name = "czytelnikTel";
+            this.czytelnikTel.Size = new System.Drawing.Size(153, 23);
+            this.czytelnikTel.TabIndex = 13;
+            this.czytelnikTel.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // Czytelnicy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.czytelnikTel);
+            this.Controls.Add(this.czytelnikNazwisko);
+            this.Controls.Add(this.czytelnikImie);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.widokCzytelnicy);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Name = "Czytelnicy";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Czytelnicy";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Czytelnicy_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.widokCzytelnicy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView widokCzytelnicy;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox czytelnikImie;
+        private System.Windows.Forms.TextBox czytelnikNazwisko;
+        private System.Windows.Forms.TextBox czytelnikTel;
     }
 }

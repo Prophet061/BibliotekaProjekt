@@ -83,6 +83,7 @@ namespace BibliotekaProjekt
             this.bibliotekarzImie.Name = "bibliotekarzImie";
             this.bibliotekarzImie.Size = new System.Drawing.Size(153, 23);
             this.bibliotekarzImie.TabIndex = 41;
+            this.bibliotekarzImie.TextChanged += new System.EventHandler(this.bibliotekarzImie_TextChanged);
             // 
             // button4
             // 
@@ -98,7 +99,7 @@ namespace BibliotekaProjekt
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(808, 12);
+            this.button5.Location = new System.Drawing.Point(764, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(113, 38);
             this.button5.TabIndex = 38;
@@ -111,9 +112,13 @@ namespace BibliotekaProjekt
             this.widokBibliotekarze.Location = new System.Drawing.Point(371, 56);
             this.widokBibliotekarze.MultiSelect = false;
             this.widokBibliotekarze.Name = "widokBibliotekarze";
+            this.widokBibliotekarze.RowHeadersVisible = false;
             this.widokBibliotekarze.RowTemplate.Height = 25;
-            this.widokBibliotekarze.Size = new System.Drawing.Size(550, 382);
+            this.widokBibliotekarze.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.widokBibliotekarze.Size = new System.Drawing.Size(506, 382);
             this.widokBibliotekarze.TabIndex = 37;
+            this.widokBibliotekarze.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellClick);
+            this.widokBibliotekarze.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellContentClick);
             // 
             // button3
             // 
@@ -143,6 +148,7 @@ namespace BibliotekaProjekt
             this.button1.TabIndex = 34;
             this.button1.Text = "Usuń";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4
             // 
@@ -178,7 +184,8 @@ namespace BibliotekaProjekt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(879, 450);
             this.Controls.Add(this.bibliotekarzTel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bibliotekarzHaslo);
