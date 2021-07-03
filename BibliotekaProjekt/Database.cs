@@ -24,7 +24,7 @@ namespace BibliotekaProjekt
 
             try
             {
-                sqlCon.ConnectionString = "server=" + host + ";" + "user id=" + user + ";" + "password=" + password + ";" + "database=" + name;
+                sqlCon.ConnectionString = "Server=" + host + "; Database=" + name + "; Uid=" + user + ";" + "Pwd=" + password + ";";
                 sqlCon.Open();
                 sqlCmd.Connection = sqlCon;
 
@@ -37,6 +37,7 @@ namespace BibliotekaProjekt
                 sqlRead = sqlCmd.ExecuteReader();
                 sqlDt.Load(sqlRead);
                 sqlRead.Close();
+                sqlCon.Close();
 
                 return sqlDt;
             }
@@ -48,10 +49,36 @@ namespace BibliotekaProjekt
             return null;
         }
 
+        public int Exec(string query, IDictionary Parameters)
+        {
+
+            try
+            {
+                sqlCon.ConnectionString = "server=" + host + ";" + "user id=" + user + ";" + "password=" + password + ";" + "database=" + name;
+                sqlCon.Open();
+                sqlCmd.Connection = sqlCon;
+
+                sqlCmd.CommandText = query;
+                foreach (DictionaryEntry data in Parameters)
+                {
+                    sqlCmd.Parameters.AddWithValue("@" + data.Key, data.Value);
+                }
+                int rows_affected = sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+
+
+                return rows_affected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return 0;
+        }
+
         ~Database()
         {
-            //MessageBox.Show("close");
-            //sqlCon.Close();
         }
 
     }

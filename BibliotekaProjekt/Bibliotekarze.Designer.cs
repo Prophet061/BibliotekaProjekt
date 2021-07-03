@@ -30,179 +30,206 @@ namespace BibliotekaProjekt
         private void InitializeComponent()
         {
             this.bibliotekarzTel = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelTelefon = new System.Windows.Forms.Label();
             this.bibliotekarzHaslo = new System.Windows.Forms.TextBox();
             this.bibliotekarzNazwisko = new System.Windows.Forms.TextBox();
             this.bibliotekarzImie = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.widokBibliotekarze = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.bibliotekarzActionButton = new System.Windows.Forms.Button();
+            this.bibliotekarzDeleteButton = new System.Windows.Forms.Button();
+            this.labelHaslo = new System.Windows.Forms.Label();
+            this.labelNazwisko = new System.Windows.Forms.Label();
+            this.labelImie = new System.Windows.Forms.Label();
+            this.bibliotekarzLogin = new System.Windows.Forms.TextBox();
+            this.labelLogin = new System.Windows.Forms.Label();
+            this.bibliotekarzAddButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.widokBibliotekarze)).BeginInit();
             this.SuspendLayout();
             // 
             // bibliotekarzTel
             // 
-            this.bibliotekarzTel.Location = new System.Drawing.Point(201, 258);
+            this.bibliotekarzTel.Location = new System.Drawing.Point(21, 378);
             this.bibliotekarzTel.Name = "bibliotekarzTel";
-            this.bibliotekarzTel.Size = new System.Drawing.Size(153, 23);
+            this.bibliotekarzTel.Size = new System.Drawing.Size(240, 25);
             this.bibliotekarzTel.TabIndex = 45;
+            this.bibliotekarzTel.Visible = false;
             // 
-            // label5
+            // labelTelefon
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(21, 258);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(160, 30);
-            this.label5.TabIndex = 44;
-            this.label5.Text = "Numer telefonu";
+            this.labelTelefon.AutoSize = true;
+            this.labelTelefon.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTelefon.Location = new System.Drawing.Point(21, 356);
+            this.labelTelefon.Name = "labelTelefon";
+            this.labelTelefon.Size = new System.Drawing.Size(99, 17);
+            this.labelTelefon.TabIndex = 44;
+            this.labelTelefon.Text = "Numer telefonu";
+            this.labelTelefon.Visible = false;
             // 
             // bibliotekarzHaslo
             // 
-            this.bibliotekarzHaslo.Location = new System.Drawing.Point(201, 211);
+            this.bibliotekarzHaslo.Location = new System.Drawing.Point(21, 318);
             this.bibliotekarzHaslo.Name = "bibliotekarzHaslo";
-            this.bibliotekarzHaslo.Size = new System.Drawing.Size(153, 23);
-            this.bibliotekarzHaslo.TabIndex = 43;
+            this.bibliotekarzHaslo.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzHaslo.TabIndex = 44;
+            this.bibliotekarzHaslo.Visible = false;
             // 
             // bibliotekarzNazwisko
             // 
-            this.bibliotekarzNazwisko.Location = new System.Drawing.Point(201, 163);
+            this.bibliotekarzNazwisko.Location = new System.Drawing.Point(21, 196);
             this.bibliotekarzNazwisko.Name = "bibliotekarzNazwisko";
-            this.bibliotekarzNazwisko.Size = new System.Drawing.Size(153, 23);
+            this.bibliotekarzNazwisko.Size = new System.Drawing.Size(240, 25);
             this.bibliotekarzNazwisko.TabIndex = 42;
+            this.bibliotekarzNazwisko.Visible = false;
             // 
             // bibliotekarzImie
             // 
-            this.bibliotekarzImie.Location = new System.Drawing.Point(201, 117);
+            this.bibliotekarzImie.Location = new System.Drawing.Point(21, 136);
             this.bibliotekarzImie.Name = "bibliotekarzImie";
-            this.bibliotekarzImie.Size = new System.Drawing.Size(153, 23);
+            this.bibliotekarzImie.Size = new System.Drawing.Size(240, 25);
             this.bibliotekarzImie.TabIndex = 41;
-            this.bibliotekarzImie.TextChanged += new System.EventHandler(this.bibliotekarzImie_TextChanged);
+            this.bibliotekarzImie.Visible = false;
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(7, 12);
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button4.Location = new System.Drawing.Point(21, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(138, 38);
+            this.button4.Size = new System.Drawing.Size(240, 40);
             this.button4.TabIndex = 39;
-            this.button4.Text = "Strona główna";
+            this.button4.Text = "Powrót";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button5.Location = new System.Drawing.Point(764, 12);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(113, 38);
-            this.button5.TabIndex = 38;
-            this.button5.Text = "Wyjście";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // widokBibliotekarze
             // 
+            this.widokBibliotekarze.AllowUserToAddRows = false;
+            this.widokBibliotekarze.AllowUserToDeleteRows = false;
+            this.widokBibliotekarze.AllowUserToOrderColumns = true;
+            this.widokBibliotekarze.AllowUserToResizeColumns = false;
+            this.widokBibliotekarze.AllowUserToResizeRows = false;
+            this.widokBibliotekarze.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.widokBibliotekarze.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.widokBibliotekarze.Location = new System.Drawing.Point(371, 56);
+            this.widokBibliotekarze.Location = new System.Drawing.Point(366, 14);
             this.widokBibliotekarze.MultiSelect = false;
             this.widokBibliotekarze.Name = "widokBibliotekarze";
+            this.widokBibliotekarze.ReadOnly = true;
             this.widokBibliotekarze.RowHeadersVisible = false;
             this.widokBibliotekarze.RowTemplate.Height = 25;
             this.widokBibliotekarze.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.widokBibliotekarze.Size = new System.Drawing.Size(506, 382);
+            this.widokBibliotekarze.Size = new System.Drawing.Size(506, 389);
             this.widokBibliotekarze.TabIndex = 37;
-            this.widokBibliotekarze.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellClick);
-            this.widokBibliotekarze.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellContentClick);
             // 
-            // button3
+            // bibliotekarzActionButton
             // 
-            this.button3.Location = new System.Drawing.Point(117, 360);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(78, 48);
-            this.button3.TabIndex = 36;
-            this.button3.Text = "Edytuj";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.bibliotekarzActionButton.Location = new System.Drawing.Point(21, 409);
+            this.bibliotekarzActionButton.Name = "bibliotekarzActionButton";
+            this.bibliotekarzActionButton.Size = new System.Drawing.Size(240, 40);
+            this.bibliotekarzActionButton.TabIndex = 35;
+            this.bibliotekarzActionButton.Text = "Dodaj";
+            this.bibliotekarzActionButton.UseVisualStyleBackColor = true;
+            this.bibliotekarzActionButton.Visible = false;
             // 
-            // button2
+            // bibliotekarzDeleteButton
             // 
-            this.button2.Location = new System.Drawing.Point(178, 306);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 48);
-            this.button2.TabIndex = 35;
-            this.button2.Text = "Dodaj";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.bibliotekarzDeleteButton.Location = new System.Drawing.Point(632, 409);
+            this.bibliotekarzDeleteButton.Name = "bibliotekarzDeleteButton";
+            this.bibliotekarzDeleteButton.Size = new System.Drawing.Size(240, 40);
+            this.bibliotekarzDeleteButton.TabIndex = 34;
+            this.bibliotekarzDeleteButton.Text = "Usuń bibliotekarza";
+            this.bibliotekarzDeleteButton.UseVisualStyleBackColor = true;
+            this.bibliotekarzDeleteButton.Click += new System.EventHandler(this.bibliotekarzDeleteButton_Click);
             // 
-            // button1
+            // labelHaslo
             // 
-            this.button1.Location = new System.Drawing.Point(67, 306);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 48);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "Usuń";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.labelHaslo.AutoSize = true;
+            this.labelHaslo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelHaslo.Location = new System.Drawing.Point(21, 296);
+            this.labelHaslo.Name = "labelHaslo";
+            this.labelHaslo.Size = new System.Drawing.Size(41, 17);
+            this.labelHaslo.TabIndex = 33;
+            this.labelHaslo.Text = "Hasło";
+            this.labelHaslo.Visible = false;
             // 
-            // label4
+            // labelNazwisko
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(21, 211);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 30);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Hasło";
+            this.labelNazwisko.AutoSize = true;
+            this.labelNazwisko.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelNazwisko.Location = new System.Drawing.Point(21, 176);
+            this.labelNazwisko.Name = "labelNazwisko";
+            this.labelNazwisko.Size = new System.Drawing.Size(63, 17);
+            this.labelNazwisko.TabIndex = 32;
+            this.labelNazwisko.Text = "Nazwisko";
+            this.labelNazwisko.Visible = false;
             // 
-            // label3
+            // labelImie
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(21, 163);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 30);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Nazwisko";
+            this.labelImie.AutoSize = true;
+            this.labelImie.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelImie.Location = new System.Drawing.Point(21, 116);
+            this.labelImie.Name = "labelImie";
+            this.labelImie.Size = new System.Drawing.Size(32, 17);
+            this.labelImie.TabIndex = 31;
+            this.labelImie.Text = "Imię";
+            this.labelImie.Visible = false;
             // 
-            // label2
+            // bibliotekarzLogin
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(21, 117);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 30);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "Imię";
+            this.bibliotekarzLogin.Location = new System.Drawing.Point(21, 256);
+            this.bibliotekarzLogin.Name = "bibliotekarzLogin";
+            this.bibliotekarzLogin.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzLogin.TabIndex = 43;
+            this.bibliotekarzLogin.Visible = false;
+            // 
+            // labelLogin
+            // 
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelLogin.Location = new System.Drawing.Point(21, 236);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(120, 17);
+            this.labelLogin.TabIndex = 47;
+            this.labelLogin.Text = "Nazwa użytkownika";
+            this.labelLogin.Visible = false;
+            // 
+            // bibliotekarzAddButton
+            // 
+            this.bibliotekarzAddButton.Location = new System.Drawing.Point(366, 409);
+            this.bibliotekarzAddButton.Name = "bibliotekarzAddButton";
+            this.bibliotekarzAddButton.Size = new System.Drawing.Size(240, 40);
+            this.bibliotekarzAddButton.TabIndex = 48;
+            this.bibliotekarzAddButton.Text = "Dodaj bibliotekarza";
+            this.bibliotekarzAddButton.UseVisualStyleBackColor = true;
+            this.bibliotekarzAddButton.Click += new System.EventHandler(this.bibliotekarzAddButton_Click);
             // 
             // Bibliotekarze
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(879, 450);
+            this.ClientSize = new System.Drawing.Size(884, 461);
+            this.Controls.Add(this.bibliotekarzAddButton);
+            this.Controls.Add(this.labelLogin);
+            this.Controls.Add(this.bibliotekarzLogin);
             this.Controls.Add(this.bibliotekarzTel);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelTelefon);
             this.Controls.Add(this.bibliotekarzHaslo);
             this.Controls.Add(this.bibliotekarzNazwisko);
             this.Controls.Add(this.bibliotekarzImie);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.widokBibliotekarze);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.bibliotekarzActionButton);
+            this.Controls.Add(this.bibliotekarzDeleteButton);
+            this.Controls.Add(this.labelHaslo);
+            this.Controls.Add(this.labelNazwisko);
+            this.Controls.Add(this.labelImie);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(900, 500);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(900, 500);
             this.Name = "Bibliotekarze";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bibliotekarze";
+            this.Text = "Sytem biblioteczny - Bibliotekarze";
             this.Load += new System.EventHandler(this.Bibliotekarze_Load);
             ((System.ComponentModel.ISupportInitialize)(this.widokBibliotekarze)).EndInit();
             this.ResumeLayout(false);
@@ -213,18 +240,21 @@ namespace BibliotekaProjekt
         #endregion
 
         private System.Windows.Forms.TextBox bibliotekarzTel;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelTelefon;
         private System.Windows.Forms.TextBox bibliotekarzHaslo;
         private System.Windows.Forms.TextBox bibliotekarzNazwisko;
         private System.Windows.Forms.TextBox bibliotekarzImie;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridView widokBibliotekarze;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bibliotekarzDeleteButton;
+        private System.Windows.Forms.Label labelHaslo;
+        private System.Windows.Forms.Label labelNazwisko;
+        private System.Windows.Forms.Label labelImie;
+        private System.Windows.Forms.TextBox bibliotekarzLogin;
+        private System.Windows.Forms.Label labelLogin;
+        private System.Windows.Forms.Button bibliotekarzAddButton;
+        private System.Windows.Forms.Button bibliotekarzActionButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
     }
 }

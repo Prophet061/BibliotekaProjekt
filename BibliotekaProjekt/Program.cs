@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BibliotekaProjekt
@@ -17,7 +14,11 @@ namespace BibliotekaProjekt
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
             Application.Run(new Czytelnicy());
+=======
+            Application.Run(new Bibliotekarze());
+>>>>>>> 3bc40f5b5a22278cb9486a7819e0142f79b2bff4
         }
     }
 }

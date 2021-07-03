@@ -134,7 +134,8 @@ namespace BibliotekaProjekt
             // 
             // Login
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -142,8 +143,6 @@ namespace BibliotekaProjekt
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(900, 500);
             this.Name = "Login";
-            this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "System biblioteczny - logowanie";
             this.panel1.ResumeLayout(false);
@@ -155,8 +154,6 @@ namespace BibliotekaProjekt
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textLogin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
