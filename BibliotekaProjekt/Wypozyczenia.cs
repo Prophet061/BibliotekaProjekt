@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -12,240 +11,180 @@ namespace BibliotekaProjekt
 {
     public partial class Wypozyczenia : Form
     {
-        int cenaZaDzien = 3;
+        int i;
 
-        private int UserId = 0;
+        MySqlConnection sqlCon = new MySqlConnection();
+        MySqlCommand sqlCmd = new MySqlCommand();
+        DataTable sqlDt = new DataTable();
+        String sqlQuery;
+        MySqlDataAdapter DtA = new MySqlDataAdapter();
+        MySqlDataReader sqlRead;
 
-        public void setUserId(int id)
-        {
-            UserId = id;
-        }
+        DataSet DS = new DataSet();
 
-        public int getUserId()
-        {
-            return UserId;
-        }
+        String server = "sql.serwer2077031.home.pl";
+        String username = "33700168_programowanie";
+        String password = "c6cBK3cQ";
+        String database = "33700168_programowanie";
+        public static string OPTION = "Convert Zero Datetime=True";
+
+
+
 
         public Wypozyczenia()
         {
             InitializeComponent();
         }
 
-        private void loadData()
+        private void upLoadData()
         {
-            Database db = new Database();
-            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database + ";" + OPTION + ";";
 
-            DataTable data = db.Query("SELECT idWypozyczenia, Ksiazki.Tytul, CONCAT(Czytelnik.Imie, ' ', Czytelnik.Nazwisko), CONCAT(Bibliotekarz1.Imie, ' ', Bibliotekarz1.Nazwisko), dataWypozyczenia, DATE_ADD(dataWypozyczenia, INTERVAL 2 WEEK) FROM Wypozyczenia " +
-                                                                                     "LEFT JOIN Ksiazki ON Wypozyczenia.idKsiazka = Ksiazki.idKsiazki " +
-                                                                                     "LEFT JOIN Czytelnik ON Wypozyczenia.IdCzytelnik = Czytelnik.idCzytelnik " +
-                                                                                     "LEFT JOIN Bibliotekarz as Bibliotekarz1 ON Wypozyczenia.osobaWypozyczajaca = Bibliotekarz1.idBibliotekarz " +
-                                                                                     "WHERE ISNULL(dataOdbioru)", Parameters);
-
-            widokWypozyczenia.DataSource = data;
-            if (data != null && data.Rows.Count > 0)
-            {
-                widokWypozyczenia.Columns[0].HeaderText = "ID";
-                widokWypozyczenia.Columns[1].HeaderText = "Ksiazka";
-                widokWypozyczenia.Columns[2].HeaderText = "Czytelnik";
-                widokWypozyczenia.Columns[3].HeaderText = "Wypozyczył";
-                widokWypozyczenia.Columns[4].HeaderText = "Data wypożyczenia";
-                widokWypozyczenia.Columns[5].HeaderText = "Termin zwrotu";
-
-                widokWypozyczenia.ClearSelection();
-            }
+            sqlCon.Open();
+            sqlCmd.Connection = sqlCon;
+            sqlCmd.CommandText = "SELECT * FROM Wypozyczenia";
+            sqlRead = sqlCmd.ExecuteReader();
+            sqlDt.Load(sqlRead);
+            sqlRead.Close();
+            sqlCon.Close();
+            widokWypozyczenia.DataSource = sqlDt;
         }
 
         private void Wypozyczenia_Load(object sender, EventArgs e)
         {
-            loadData();
+            upLoadData();
+        }
 
-
-            Database db = new Database();
-            Dictionary<string, string> Parameters = new Dictionary<string, string>();
-            MySqlDataReader reader = db.Query2("SELECT Tytul, idKSiazki FROM Ksiazki Where Ilosc > 0", Parameters);
-
-            while (reader.Read())
-            {
-                wypozyczenieKsiazka.Items.Add(reader["Tytul"].ToString());
-            }
-            reader.Close();
-            db.Close();
-
-            Database db1 = new Database();
-            MySqlDataReader reader1 = db1.Query2("SELECT CONCAT(Imie, ' ', Nazwisko) as Nazwa FROM Czytelnik", Parameters);
-            while (reader1.Read())
-            {
-                wypozyczenieCzytelnik.Items.Add(reader1["Nazwa"].ToString());
-            }
-            reader1.Close();
-            db1.Close();
+        private void label5_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string ksiazka = wypozyczenieKsiazka.SelectedItem.ToString();
-            string czytelnik_s = wypozyczenieCzytelnik.SelectedItem.ToString();
-            string[] czytelnik = czytelnik_s.Split(" ");
 
-            Database db_q = new Database();
-            Dictionary<string, string> Parameters_q = new Dictionary<string, string>();
-            Parameters_q.Add("Tytul", ksiazka);
-
-            MySqlDataReader query = db_q.Query2("SELECT Ilosc FROM Ksiazki Where Tytul=@Tytul LIMIT 1", Parameters_q);
-            int ksiazka_ilosc = 0;
-            while (query.Read())
-            {
-                ksiazka_ilosc = Convert.ToInt32(query["Ilosc"]);
-                if(ksiazka_ilosc < 1)
-                {
-                    MessageBox.Show("Nie ma już dostępnych egzemplarzy wskazanej książki");
-                    return;
-                }
-            }
-            query.Close();
-            db_q.Close();
-
-
-
-            Database db = new Database();
-            Dictionary<string, string> Parameters = new Dictionary<string, string>();
-
-            Parameters.Add("User", Convert.ToString(this.getUserId()));
-            Parameters.Add("Tytul", ksiazka);
-            Parameters.Add("Imie", czytelnik[0]);
-            Parameters.Add("Nazwisko", czytelnik[1]);
-
-            int result = db.Exec("INSERT INTO Wypozyczenia (idKsiazka, idCzytelnik, OsobaWypozyczajaca, dataWypozyczenia) VALUES ((SELECT idKsiazki FROM Ksiazki WHERE Tytul=@Tytul),(SELECT idCzytelnik FROM Czytelnik WHERE Imie=@Imie AND Nazwisko=@Nazwisko),@User, current_date())", Parameters);
-
-
-            if (result > 0)
-            {
-                db.Close();
-                Database db_e = new Database();
-                Dictionary<string, string> Parameters_exec = new Dictionary<string, string>();
-
-                Parameters_exec.Add("Ilosc", Convert.ToString(ksiazka_ilosc - 1));
-                Parameters_exec.Add("Tytul", ksiazka);
-                db_e.Exec("UPDATE Ksiazki SET Ilosc=@Ilosc WHERE Tytul=@Tytul", Parameters_exec);
-                db_e.Close();
-
-
-                MessageBox.Show("Książka została wypożyczona");
-            }
-
-            loadData();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            StronaGlowna stronaglowna = new StronaGlowna();
-            stronaglowna.setUserId(this.getUserId());
-            stronaglowna.Show();
+            StronaGlowna main = new StronaGlowna();
+            main.Show();
             this.Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            labelCzytelnik.Visible = true;
-            labelKsiazka.Visible = true;
-            wypozyczenieCzytelnik.Visible = true;
-            wypozyczenieKsiazka.Visible = true;
-            buttonAddWypozyczenie.Visible = true;
+            this.Close();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int idWypozyczenie = Convert.ToInt32(widokWypozyczenia.SelectedRows[0].Cells[0].Value);
-            string ksiazka = widokWypozyczenia.SelectedRows[0].Cells[1].Value.ToString();
+            i = Convert.ToInt32(widokWypozyczenia.SelectedRows[0].Cells[0].Value);
 
-            Database db_q = new Database();
-            Dictionary<string, string> Parameters_query = new Dictionary<string, string>();
-            Parameters_query.Add("idWypozyczenia", idWypozyczenie.ToString());
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
 
-            MySqlDataReader query = db_q.Query2("SELECT * FROM Wypozyczenia WHERE idWypozyczenia=@idWypozyczenia", Parameters_query);
-            DateTime dataWypozyczenia = new DateTime();
-            while (query.Read())
+
+
+            sqlCon.Open();
+            sqlQuery = "delete from Wypozyczenia where idWypozyczenia=@idWypozyczenia";
+
+            sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
+            sqlCmd.Parameters.AddWithValue("@idWypozyczenia", i);
+
+            sqlCmd.ExecuteNonQuery();
+            sqlCon.Close();
+
+            foreach (DataGridViewRow item in this.widokWypozyczenia.SelectedRows)
             {
-                DateTime now = DateTime.Now;
-                dataWypozyczenia = DateTime.Parse(query["dataWypozyczenia"].ToString()).AddDays(14);
-
-                int compare = DateTime.Compare(dataWypozyczenia, now);
-
-                if(compare < 0)
-                {
-                    int difference = Convert.ToInt32((dataWypozyczenia - now).TotalDays);
-                    if(difference < 0)
-                    {
-                        difference = difference * -1;
-                    }
-
-
-                    DialogResult dialogResult = MessageBox.Show("Podana książka została oddana po terminie zwrotu. Wymagane jest pobranie opłaty w wysokości: "+(cenaZaDzien * difference)+" eurogąbek za spóźnienie "+difference+" dni", "Wymagana opłata", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Database db_e = new Database();
-                        Dictionary<string, string> Parameters_exec = new Dictionary<string, string>();
-                        Parameters_exec.Add("Tytul", ksiazka);
-
-                        db_e.Exec("UPDATE Ksiazki SET Ilosc=Ilosc+1 WHERE Tytul=@Tytul", Parameters_exec);
-                        db_e.Close();
-
-
-                        Database db = new Database();
-                        Dictionary<string, string> Parameters = new Dictionary<string, string>();
-                        Parameters.Add("Osoba", this.getUserId().ToString());
-                        Parameters.Add("Id", idWypozyczenie.ToString());
-
-                        db.Exec("UPDATE Wypozyczenia SET osobaOdbierajaca=@Osoba, dataOdbioru=current_date() WHERE idWypozyczenia=@Id", Parameters);
-                        db.Close();
-
-                        MessageBox.Show("Książka została zwrócona");
-
-                        db_q.Close();
-
-                        loadData();
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        db_q.Close();
-                    }
-
-                } else
-                {
-                    Database db_e = new Database();
-                    Dictionary<string, string> Parameters_exec = new Dictionary<string, string>();
-                    Parameters_exec.Add("Tytul", ksiazka);
-
-                    db_e.Exec("UPDATE Ksiazki SET Ilosc=Ilosc+1 WHERE Tytul=@Tytul", Parameters_exec);
-                    db_e.Close();
-
-
-                    Database db = new Database();
-                    Dictionary<string, string> Parameters = new Dictionary<string, string>();
-                    Parameters.Add("Osoba", this.getUserId().ToString());
-                    Parameters.Add("Id", idWypozyczenie.ToString());
-
-                    db.Exec("UPDATE Wypozyczenia SET osobaOdbierajaca=@Osoba, dataOdbioru=current_date() WHERE idWypozyczenia=@Id", Parameters);
-                    db.Close();
-
-                    MessageBox.Show("Książka została zwrócona");
-
-                    loadData();
-                }
+                widokWypozyczenia.Rows.RemoveAt(item.Index);
             }
 
-            query.Close();
 
 
+            upLoadData();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //DateTime theDate = DateTime.Now;
+            //theDate.ToString("yyyy-MM-dd");
+            //string strDate = dataWyp.Value.ToString("yyyy/MM/dd");
+            //string strDate1 = dataOdb.Value.ToString("yyyy/MM/dd");
+            i = Convert.ToInt32(widokWypozyczenia.SelectedRows[0].Cells[0].Value);
+
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+            sqlCon.Open();
+
+            try
+            {
+                MySqlCommand sqlCmd = new MySqlCommand();
+                sqlCmd.Connection = sqlCon;
+
+                sqlCmd.CommandText = "Update Wypozyczenia set idKsiazka=@idKsiazka, idCzytelnik=@idCzytelnik, osobaWypozyczajaca=@osobaWypozyczajaca, osobaOdbierajaca=@osobaOdbierajaca, dataWypozyczenia=@dataWypozyczenia, dataOdbioru=@dataOdbioru where idWypozyczenia=@idWypozyczenia";
+
+                sqlCmd.CommandType = CommandType.Text;
+                sqlCmd.Parameters.AddWithValue("@idWypozyczenia", i);
+                sqlCmd.Parameters.AddWithValue("@idKsiazka", idKsiazki.Text);
+                sqlCmd.Parameters.AddWithValue("@idCzytelnik", idCzytelnika.Text);
+                sqlCmd.Parameters.AddWithValue("@osobaWypozyczajaca", osobaWyp.Text);
+                sqlCmd.Parameters.AddWithValue("@osobaOdbierajaca", osobaOdb.Text);
+                sqlCmd.Parameters.AddWithValue("@dataWypozyczenia", dataWyp.Text);
+                sqlCmd.Parameters.AddWithValue("@dataOdbioru", dataOdb.Text);
+
+                sqlCmd.ExecuteNonQuery();
+                sqlCon.Close();
+                upLoadData();
+
+            }
 
 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+
+            try
+            {
+                sqlCon.Open();
+                sqlQuery = "insert into Wypozyczenia (idKsiazka, idCzytelnik, osobaWypozyczajaca, osobaOdbierajaca, dataWypozyczenia, dataOdbioru)" +
+                "values('" + idKsiazki.Text + "', '" + idCzytelnika.Text + "', '" +
+                osobaWyp.Text + "','" + osobaOdb.Text + "','" + this.dataWyp.Text + "','" + this.dataOdb.Text + "')";
+
+                sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
+                sqlRead = sqlCmd.ExecuteReader();
+
+                sqlCon.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+            upLoadData();
+        }
+
+        private void widokWypozyczenia_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
-}
+    }
  
 
 

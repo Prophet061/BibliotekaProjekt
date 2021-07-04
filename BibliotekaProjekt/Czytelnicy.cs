@@ -205,5 +205,10 @@ namespace BibliotekaProjekt
 
             czytelnikActionButton.Visible = false;
         }
+
+        private void czytelnikActionButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -51,30 +51,30 @@ namespace BibliotekaProjekt
             // 
             // ksiazkiIsbn
             // 
-            this.ksiazkiIsbn.Location = new System.Drawing.Point(21, 256);
+            this.ksiazkiIsbn.Location = new System.Drawing.Point(21, 226);
             this.ksiazkiIsbn.Name = "ksiazkiIsbn";
-            this.ksiazkiIsbn.Size = new System.Drawing.Size(240, 25);
+            this.ksiazkiIsbn.Size = new System.Drawing.Size(240, 23);
             this.ksiazkiIsbn.TabIndex = 27;
             // 
             // ksiazkiGatunek
             // 
-            this.ksiazkiGatunek.Location = new System.Drawing.Point(21, 196);
+            this.ksiazkiGatunek.Location = new System.Drawing.Point(21, 173);
             this.ksiazkiGatunek.Name = "ksiazkiGatunek";
-            this.ksiazkiGatunek.Size = new System.Drawing.Size(240, 25);
+            this.ksiazkiGatunek.Size = new System.Drawing.Size(240, 23);
             this.ksiazkiGatunek.TabIndex = 26;
             // 
             // ksiazkiAutor
             // 
-            this.ksiazkiAutor.Location = new System.Drawing.Point(21, 136);
+            this.ksiazkiAutor.Location = new System.Drawing.Point(21, 120);
             this.ksiazkiAutor.Name = "ksiazkiAutor";
-            this.ksiazkiAutor.Size = new System.Drawing.Size(240, 25);
+            this.ksiazkiAutor.Size = new System.Drawing.Size(240, 23);
             this.ksiazkiAutor.TabIndex = 25;
             // 
             // ksiazkiTytul
             // 
-            this.ksiazkiTytul.Location = new System.Drawing.Point(21, 76);
+            this.ksiazkiTytul.Location = new System.Drawing.Point(21, 67);
             this.ksiazkiTytul.Name = "ksiazkiTytul";
-            this.ksiazkiTytul.Size = new System.Drawing.Size(240, 25);
+            this.ksiazkiTytul.Size = new System.Drawing.Size(240, 23);
             this.ksiazkiTytul.TabIndex = 24;
             // 
             // widokKsiazki
@@ -84,30 +84,31 @@ namespace BibliotekaProjekt
             this.widokKsiazki.AllowUserToResizeColumns = false;
             this.widokKsiazki.AllowUserToResizeRows = false;
             this.widokKsiazki.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.widokKsiazki.Location = new System.Drawing.Point(366, 14);
+            this.widokKsiazki.Location = new System.Drawing.Point(366, 12);
             this.widokKsiazki.MultiSelect = false;
             this.widokKsiazki.Name = "widokKsiazki";
             this.widokKsiazki.ReadOnly = true;
             this.widokKsiazki.RowHeadersVisible = false;
             this.widokKsiazki.RowTemplate.Height = 25;
             this.widokKsiazki.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.widokKsiazki.Size = new System.Drawing.Size(506, 389);
+            this.widokKsiazki.Size = new System.Drawing.Size(506, 343);
             this.widokKsiazki.TabIndex = 21;
             // 
             // ksiazkiActionButton
             // 
-            this.ksiazkiActionButton.Location = new System.Drawing.Point(21, 409);
+            this.ksiazkiActionButton.Location = new System.Drawing.Point(21, 361);
             this.ksiazkiActionButton.Name = "ksiazkiActionButton";
-            this.ksiazkiActionButton.Size = new System.Drawing.Size(240, 40);
+            this.ksiazkiActionButton.Size = new System.Drawing.Size(240, 35);
             this.ksiazkiActionButton.TabIndex = 20;
             this.ksiazkiActionButton.Text = "Dodaj";
             this.ksiazkiActionButton.UseVisualStyleBackColor = true;
+            this.ksiazkiActionButton.Click += new System.EventHandler(this.ksiazkiActionButton_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(366, 409);
+            this.button2.Location = new System.Drawing.Point(366, 361);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(240, 40);
+            this.button2.Size = new System.Drawing.Size(240, 35);
             this.button2.TabIndex = 19;
             this.button2.Text = "Dodaj książke";
             this.button2.UseVisualStyleBackColor = true;
@@ -115,9 +116,9 @@ namespace BibliotekaProjekt
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(632, 409);
+            this.button1.Location = new System.Drawing.Point(632, 361);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(240, 40);
+            this.button1.Size = new System.Drawing.Size(240, 35);
             this.button1.TabIndex = 18;
             this.button1.Text = "Usuń książke";
             this.button1.UseVisualStyleBackColor = true;
@@ -127,7 +128,7 @@ namespace BibliotekaProjekt
             // 
             this.labelIsbn.AutoSize = true;
             this.labelIsbn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelIsbn.Location = new System.Drawing.Point(21, 236);
+            this.labelIsbn.Location = new System.Drawing.Point(21, 208);
             this.labelIsbn.Name = "labelIsbn";
             this.labelIsbn.Size = new System.Drawing.Size(79, 17);
             this.labelIsbn.TabIndex = 17;
@@ -137,7 +138,7 @@ namespace BibliotekaProjekt
             // 
             this.labelGatunek.AutoSize = true;
             this.labelGatunek.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelGatunek.Location = new System.Drawing.Point(21, 176);
+            this.labelGatunek.Location = new System.Drawing.Point(21, 155);
             this.labelGatunek.Name = "labelGatunek";
             this.labelGatunek.Size = new System.Drawing.Size(55, 17);
             this.labelGatunek.TabIndex = 16;
@@ -147,7 +148,7 @@ namespace BibliotekaProjekt
             // 
             this.labelAutor.AutoSize = true;
             this.labelAutor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelAutor.Location = new System.Drawing.Point(21, 116);
+            this.labelAutor.Location = new System.Drawing.Point(21, 102);
             this.labelAutor.Name = "labelAutor";
             this.labelAutor.Size = new System.Drawing.Size(40, 17);
             this.labelAutor.TabIndex = 15;
@@ -157,7 +158,7 @@ namespace BibliotekaProjekt
             // 
             this.labelTytul.AutoSize = true;
             this.labelTytul.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTytul.Location = new System.Drawing.Point(21, 56);
+            this.labelTytul.Location = new System.Drawing.Point(21, 49);
             this.labelTytul.Name = "labelTytul";
             this.labelTytul.Size = new System.Drawing.Size(34, 17);
             this.labelTytul.TabIndex = 14;
@@ -165,16 +166,16 @@ namespace BibliotekaProjekt
             // 
             // ksiazkiRok
             // 
-            this.ksiazkiRok.Location = new System.Drawing.Point(21, 318);
+            this.ksiazkiRok.Location = new System.Drawing.Point(21, 281);
             this.ksiazkiRok.Name = "ksiazkiRok";
-            this.ksiazkiRok.Size = new System.Drawing.Size(240, 25);
+            this.ksiazkiRok.Size = new System.Drawing.Size(240, 23);
             this.ksiazkiRok.TabIndex = 29;
             // 
             // labelRok
             // 
             this.labelRok.AutoSize = true;
             this.labelRok.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelRok.Location = new System.Drawing.Point(21, 296);
+            this.labelRok.Location = new System.Drawing.Point(21, 261);
             this.labelRok.Name = "labelRok";
             this.labelRok.Size = new System.Drawing.Size(81, 17);
             this.labelRok.TabIndex = 28;
@@ -184,7 +185,7 @@ namespace BibliotekaProjekt
             // 
             this.labelIlosc.AutoSize = true;
             this.labelIlosc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelIlosc.Location = new System.Drawing.Point(21, 356);
+            this.labelIlosc.Location = new System.Drawing.Point(21, 314);
             this.labelIlosc.Name = "labelIlosc";
             this.labelIlosc.Size = new System.Drawing.Size(34, 17);
             this.labelIlosc.TabIndex = 30;
@@ -192,17 +193,17 @@ namespace BibliotekaProjekt
             // 
             // ksiazkiIlosc
             // 
-            this.ksiazkiIlosc.Location = new System.Drawing.Point(21, 378);
+            this.ksiazkiIlosc.Location = new System.Drawing.Point(21, 334);
             this.ksiazkiIlosc.Name = "ksiazkiIlosc";
-            this.ksiazkiIlosc.Size = new System.Drawing.Size(240, 25);
+            this.ksiazkiIlosc.Size = new System.Drawing.Size(240, 23);
             this.ksiazkiIlosc.TabIndex = 31;
             // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(21, 12);
+            this.button4.Location = new System.Drawing.Point(21, 11);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(240, 40);
+            this.button4.Size = new System.Drawing.Size(240, 35);
             this.button4.TabIndex = 23;
             this.button4.Text = "Powrót";
             this.button4.UseVisualStyleBackColor = true;
@@ -210,9 +211,9 @@ namespace BibliotekaProjekt
             // 
             // Ksiazki
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 461);
+            this.ClientSize = new System.Drawing.Size(884, 407);
             this.Controls.Add(this.ksiazkiIlosc);
             this.Controls.Add(this.labelIlosc);
             this.Controls.Add(this.ksiazkiRok);
