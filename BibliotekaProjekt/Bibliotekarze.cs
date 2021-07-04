@@ -246,6 +246,8 @@ namespace BibliotekaProjekt
             bibliotekarzActionButton.Click -= new System.EventHandler(createNew);
             bibliotekarzActionButton.Click += new System.EventHandler(edit);
         }
+
+        
     }
 }
 

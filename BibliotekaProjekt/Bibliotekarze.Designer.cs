@@ -49,9 +49,9 @@ namespace BibliotekaProjekt
             // 
             // bibliotekarzTel
             // 
-            this.bibliotekarzTel.Location = new System.Drawing.Point(21, 378);
+            this.bibliotekarzTel.Location = new System.Drawing.Point(21, 334);
             this.bibliotekarzTel.Name = "bibliotekarzTel";
-            this.bibliotekarzTel.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzTel.Size = new System.Drawing.Size(240, 23);
             this.bibliotekarzTel.TabIndex = 45;
             this.bibliotekarzTel.Visible = false;
             // 
@@ -59,7 +59,7 @@ namespace BibliotekaProjekt
             // 
             this.labelTelefon.AutoSize = true;
             this.labelTelefon.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTelefon.Location = new System.Drawing.Point(21, 356);
+            this.labelTelefon.Location = new System.Drawing.Point(21, 314);
             this.labelTelefon.Name = "labelTelefon";
             this.labelTelefon.Size = new System.Drawing.Size(99, 17);
             this.labelTelefon.TabIndex = 44;
@@ -68,34 +68,34 @@ namespace BibliotekaProjekt
             // 
             // bibliotekarzHaslo
             // 
-            this.bibliotekarzHaslo.Location = new System.Drawing.Point(21, 318);
+            this.bibliotekarzHaslo.Location = new System.Drawing.Point(21, 281);
             this.bibliotekarzHaslo.Name = "bibliotekarzHaslo";
-            this.bibliotekarzHaslo.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzHaslo.Size = new System.Drawing.Size(240, 23);
             this.bibliotekarzHaslo.TabIndex = 44;
             this.bibliotekarzHaslo.Visible = false;
             // 
             // bibliotekarzNazwisko
             // 
-            this.bibliotekarzNazwisko.Location = new System.Drawing.Point(21, 196);
+            this.bibliotekarzNazwisko.Location = new System.Drawing.Point(21, 173);
             this.bibliotekarzNazwisko.Name = "bibliotekarzNazwisko";
-            this.bibliotekarzNazwisko.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzNazwisko.Size = new System.Drawing.Size(240, 23);
             this.bibliotekarzNazwisko.TabIndex = 42;
             this.bibliotekarzNazwisko.Visible = false;
             // 
             // bibliotekarzImie
             // 
-            this.bibliotekarzImie.Location = new System.Drawing.Point(21, 136);
+            this.bibliotekarzImie.Location = new System.Drawing.Point(21, 120);
             this.bibliotekarzImie.Name = "bibliotekarzImie";
-            this.bibliotekarzImie.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzImie.Size = new System.Drawing.Size(240, 23);
             this.bibliotekarzImie.TabIndex = 41;
             this.bibliotekarzImie.Visible = false;
             // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(21, 12);
+            this.button4.Location = new System.Drawing.Point(21, 11);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(240, 40);
+            this.button4.Size = new System.Drawing.Size(240, 35);
             this.button4.TabIndex = 39;
             this.button4.Text = "Powrót";
             this.button4.UseVisualStyleBackColor = true;
@@ -110,21 +110,21 @@ namespace BibliotekaProjekt
             this.widokBibliotekarze.AllowUserToResizeRows = false;
             this.widokBibliotekarze.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.widokBibliotekarze.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.widokBibliotekarze.Location = new System.Drawing.Point(366, 14);
+            this.widokBibliotekarze.Location = new System.Drawing.Point(366, 12);
             this.widokBibliotekarze.MultiSelect = false;
             this.widokBibliotekarze.Name = "widokBibliotekarze";
             this.widokBibliotekarze.ReadOnly = true;
             this.widokBibliotekarze.RowHeadersVisible = false;
             this.widokBibliotekarze.RowTemplate.Height = 25;
             this.widokBibliotekarze.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.widokBibliotekarze.Size = new System.Drawing.Size(506, 389);
+            this.widokBibliotekarze.Size = new System.Drawing.Size(506, 343);
             this.widokBibliotekarze.TabIndex = 37;
             // 
             // bibliotekarzActionButton
             // 
-            this.bibliotekarzActionButton.Location = new System.Drawing.Point(21, 409);
+            this.bibliotekarzActionButton.Location = new System.Drawing.Point(21, 361);
             this.bibliotekarzActionButton.Name = "bibliotekarzActionButton";
-            this.bibliotekarzActionButton.Size = new System.Drawing.Size(240, 40);
+            this.bibliotekarzActionButton.Size = new System.Drawing.Size(240, 35);
             this.bibliotekarzActionButton.TabIndex = 35;
             this.bibliotekarzActionButton.Text = "Dodaj";
             this.bibliotekarzActionButton.UseVisualStyleBackColor = true;
@@ -132,9 +132,9 @@ namespace BibliotekaProjekt
             // 
             // bibliotekarzDeleteButton
             // 
-            this.bibliotekarzDeleteButton.Location = new System.Drawing.Point(632, 409);
+            this.bibliotekarzDeleteButton.Location = new System.Drawing.Point(632, 361);
             this.bibliotekarzDeleteButton.Name = "bibliotekarzDeleteButton";
-            this.bibliotekarzDeleteButton.Size = new System.Drawing.Size(240, 40);
+            this.bibliotekarzDeleteButton.Size = new System.Drawing.Size(240, 35);
             this.bibliotekarzDeleteButton.TabIndex = 34;
             this.bibliotekarzDeleteButton.Text = "Usuń bibliotekarza";
             this.bibliotekarzDeleteButton.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@ namespace BibliotekaProjekt
             // 
             this.labelHaslo.AutoSize = true;
             this.labelHaslo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHaslo.Location = new System.Drawing.Point(21, 296);
+            this.labelHaslo.Location = new System.Drawing.Point(21, 261);
             this.labelHaslo.Name = "labelHaslo";
             this.labelHaslo.Size = new System.Drawing.Size(41, 17);
             this.labelHaslo.TabIndex = 33;
@@ -155,7 +155,7 @@ namespace BibliotekaProjekt
             // 
             this.labelNazwisko.AutoSize = true;
             this.labelNazwisko.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelNazwisko.Location = new System.Drawing.Point(21, 176);
+            this.labelNazwisko.Location = new System.Drawing.Point(21, 155);
             this.labelNazwisko.Name = "labelNazwisko";
             this.labelNazwisko.Size = new System.Drawing.Size(63, 17);
             this.labelNazwisko.TabIndex = 32;
@@ -166,7 +166,7 @@ namespace BibliotekaProjekt
             // 
             this.labelImie.AutoSize = true;
             this.labelImie.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelImie.Location = new System.Drawing.Point(21, 116);
+            this.labelImie.Location = new System.Drawing.Point(21, 102);
             this.labelImie.Name = "labelImie";
             this.labelImie.Size = new System.Drawing.Size(32, 17);
             this.labelImie.TabIndex = 31;
@@ -175,9 +175,9 @@ namespace BibliotekaProjekt
             // 
             // bibliotekarzLogin
             // 
-            this.bibliotekarzLogin.Location = new System.Drawing.Point(21, 256);
+            this.bibliotekarzLogin.Location = new System.Drawing.Point(21, 226);
             this.bibliotekarzLogin.Name = "bibliotekarzLogin";
-            this.bibliotekarzLogin.Size = new System.Drawing.Size(240, 25);
+            this.bibliotekarzLogin.Size = new System.Drawing.Size(240, 23);
             this.bibliotekarzLogin.TabIndex = 43;
             this.bibliotekarzLogin.Visible = false;
             // 
@@ -185,7 +185,7 @@ namespace BibliotekaProjekt
             // 
             this.labelLogin.AutoSize = true;
             this.labelLogin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelLogin.Location = new System.Drawing.Point(21, 236);
+            this.labelLogin.Location = new System.Drawing.Point(21, 208);
             this.labelLogin.Name = "labelLogin";
             this.labelLogin.Size = new System.Drawing.Size(120, 17);
             this.labelLogin.TabIndex = 47;
@@ -194,9 +194,9 @@ namespace BibliotekaProjekt
             // 
             // bibliotekarzAddButton
             // 
-            this.bibliotekarzAddButton.Location = new System.Drawing.Point(366, 409);
+            this.bibliotekarzAddButton.Location = new System.Drawing.Point(366, 361);
             this.bibliotekarzAddButton.Name = "bibliotekarzAddButton";
-            this.bibliotekarzAddButton.Size = new System.Drawing.Size(240, 40);
+            this.bibliotekarzAddButton.Size = new System.Drawing.Size(240, 35);
             this.bibliotekarzAddButton.TabIndex = 48;
             this.bibliotekarzAddButton.Text = "Dodaj bibliotekarza";
             this.bibliotekarzAddButton.UseVisualStyleBackColor = true;
@@ -204,10 +204,10 @@ namespace BibliotekaProjekt
             // 
             // Bibliotekarze
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(884, 461);
+            this.ClientSize = new System.Drawing.Size(884, 407);
             this.Controls.Add(this.bibliotekarzAddButton);
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.bibliotekarzLogin);
@@ -224,9 +224,9 @@ namespace BibliotekaProjekt
             this.Controls.Add(this.labelNazwisko);
             this.Controls.Add(this.labelImie);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(900, 500);
+            this.MaximumSize = new System.Drawing.Size(900, 446);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(900, 500);
+            this.MinimumSize = new System.Drawing.Size(900, 446);
             this.Name = "Bibliotekarze";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sytem biblioteczny - Bibliotekarze";
