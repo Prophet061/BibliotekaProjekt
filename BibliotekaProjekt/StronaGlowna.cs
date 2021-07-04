@@ -49,14 +49,6 @@ namespace BibliotekaProjekt
             this.Hide();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Tworcy tworcy = new Tworcy();
-            tworcy.Show();
-            this.Hide();
-
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             Wypozyczenia wypozyczenia = new Wypozyczenia();

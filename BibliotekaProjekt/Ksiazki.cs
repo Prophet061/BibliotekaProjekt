@@ -11,45 +11,47 @@ namespace BibliotekaProjekt
 {
     public partial class Ksiazki : Form
     {
-        int i;
-
-        MySqlConnection sqlCon = new MySqlConnection();
-        MySqlCommand sqlCmd = new MySqlCommand();
-        DataTable sqlDt = new DataTable();
-        String sqlQuery;
-        MySqlDataAdapter DtA = new MySqlDataAdapter();
-        MySqlDataReader sqlRead;
-
-        DataSet DS = new DataSet();
-
-        String server = "sql.serwer2077031.home.pl";
-        String username = "33700168_programowanie";
-        String password = "c6cBK3cQ";
-        String database = "33700168_programowanie";
-
+        string currentEdit;
 
         public Ksiazki()
         {
             InitializeComponent();
         }
 
-        private void upLoadData()
+        private void loadData()
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            widokKsiazki.SelectionChanged -= new System.EventHandler(this.widokKsiazki_SelectionChanged);
 
-            sqlCon.Open();
-            sqlCmd.Connection = sqlCon;
-            sqlCmd.CommandText = "SELECT * FROM Ksiazkitbl";
-            sqlRead = sqlCmd.ExecuteReader();
-            sqlDt.Load(sqlRead);
-            sqlRead.Close();
-            sqlCon.Close();
-            widokKsiazki.DataSource = sqlDt;
+            Database db = new Database();
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+
+            DataTable data = db.Query("SELECT * FROM Ksiazki", Parameters);
+
+            widokKsiazki.DataSource = data;
+            if (data != null && data.Rows.Count > 0)
+            {
+                widokKsiazki.Columns[0].HeaderText = "ID";
+                widokKsiazki.Columns[1].HeaderText = "Tytuł";
+                widokKsiazki.Columns[2].HeaderText = "Autor";
+                widokKsiazki.Columns[3].HeaderText = "Gatunek";
+                widokKsiazki.Columns[4].HeaderText = "ISBN";
+                widokKsiazki.Columns[5].HeaderText = "Rok Wydania";
+                widokKsiazki.Columns[6].HeaderText = "Ilość";
+
+                widokKsiazki.ClearSelection();
+                widokKsiazki.SelectionChanged += new System.EventHandler(this.widokKsiazki_SelectionChanged);
+            }
         }
 
-
-
-
+        private void widokKsiazki_SelectionChanged(object sender, EventArgs e)
+        {
+            if (widokKsiazki.SelectedRows.Count > 0)
+            {
+                currentEdit = widokKsiazki.SelectedRows[0].Cells[0].Value.ToString();
+                ksiazkiActionButton.Click -= new System.EventHandler(this.edit);
+                ksiazkiEditButton();
+            }
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -58,127 +60,189 @@ namespace BibliotekaProjekt
             this.Hide();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                ksiazkiTytul.Text = widokKsiazki.SelectedRows[0].Cells[1].Value.ToString();
-                ksiazkiAutor.Text = widokKsiazki.SelectedRows[0].Cells[2].Value.ToString();
-                ksiazkiGatunek.Text = widokKsiazki.SelectedRows[0].Cells[3].Value.ToString();
-                ksiazkiIsbn.Text = widokKsiazki.SelectedRows[0].Cells[4].Value.ToString();
-                ksiazkiRok.Text = widokKsiazki.SelectedRows[0].Cells[5].Value.ToString();
-                ksiazkiIlosc.Text = widokKsiazki.SelectedRows[0].Cells[6].Value.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void Ksiazki_Load(object sender, EventArgs e)
         {
-            upLoadData();
+            loadData();
+        }
+
+        private void ksiazkiEditButton()
+        {
+            labelTytul.Visible = true;
+            ksiazkiTytul.Visible = true;
+            ksiazkiTytul.Text = widokKsiazki.SelectedRows[0].Cells[1].Value.ToString();
+
+            labelAutor.Visible = true;
+            ksiazkiAutor.Visible = true;
+            ksiazkiAutor.Text = widokKsiazki.SelectedRows[0].Cells[2].Value.ToString();
+
+            labelGatunek.Visible = true;
+            ksiazkiGatunek.Visible = true;
+            ksiazkiGatunek.Text = widokKsiazki.SelectedRows[0].Cells[3].Value.ToString();
+
+            labelIsbn.Visible = true;
+            ksiazkiIsbn.Visible = true;
+            ksiazkiIsbn.Text = widokKsiazki.SelectedRows[0].Cells[4].Value.ToString();
+
+            labelRok.Visible = true;
+            ksiazkiRok.Visible = true;
+            ksiazkiRok.Text = widokKsiazki.SelectedRows[0].Cells[5].Value.ToString();
+
+            labelIlosc.Visible = true;
+            ksiazkiIlosc.Visible = true;
+            ksiazkiIlosc.Text = widokKsiazki.SelectedRows[0].Cells[6].Value.ToString();
+
+            ksiazkiActionButton.Visible = true;
+            ksiazkiActionButton.Text = "Zapisz zmiany";
+            ksiazkiActionButton.Click -= new System.EventHandler(this.createNew);
+            ksiazkiActionButton.Click += new System.EventHandler(this.edit);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            labelTytul.Visible = true;
+            ksiazkiTytul.Visible = true;
+            ksiazkiTytul.Text = "";
 
-            try
-            {
-                sqlCon.Open();
-                sqlQuery = "insert into Ksiazkitbl (Tytul, Autor, Gatunek, ISBN, RokWydania, Ilosc)" +
-                "values('" + ksiazkiTytul.Text + "', '" + ksiazkiAutor.Text + "', '" +
-                ksiazkiGatunek.Text + "','" + ksiazkiIsbn.Text + "','" + ksiazkiRok.Text + "','" + ksiazkiIlosc.Text + "')";
+            labelAutor.Visible = true;
+            ksiazkiAutor.Visible = true;
+            ksiazkiAutor.Text = "";
 
-                sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
-                sqlRead = sqlCmd.ExecuteReader();
+            labelGatunek.Visible = true;
+            ksiazkiGatunek.Visible = true;
+            ksiazkiGatunek.Text = "";
 
-                sqlCon.Close();
+            labelIsbn.Visible = true;
+            ksiazkiIsbn.Visible = true;
+            ksiazkiIsbn.Text = "";
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                sqlCon.Close();
-            }
-            upLoadData();
+            labelRok.Visible = true;
+            ksiazkiRok.Visible = true;
+            ksiazkiRok.Text = "";
+
+            labelIlosc.Visible = true;
+            ksiazkiIlosc.Visible = true;
+            ksiazkiIlosc.Text = "";
+
+            ksiazkiActionButton.Visible = true;
+            ksiazkiActionButton.Text = "Dodaj";
+            ksiazkiActionButton.Click += new System.EventHandler(this.createNew);
+            ksiazkiActionButton.Click -= new System.EventHandler(this.edit);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void createNew(object sender, EventArgs e)
         {
-            i = Convert.ToInt32(widokKsiazki.SelectedRows[0].Cells[0].Value);
+            Database db = new Database();
 
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("Tytul", ksiazkiTytul.Text);
+            Parameters.Add("Autor", ksiazkiAutor.Text);
+            Parameters.Add("Gatunek", ksiazkiGatunek.Text);
+            Parameters.Add("ISBN", ksiazkiIsbn.Text);
+            Parameters.Add("RokWydania", ksiazkiRok.Text);
+            Parameters.Add("Ilosc", ksiazkiIlosc.Text);
 
-            sqlCon.Open();
+            int result = db.Exec("INSERT INTO Ksiazki (Tytul, Autor, Gatunek, ISBN, RokWydania, Ilosc) VALUES (@Tytul, @Autor, @Gatunek, @ISBN, @RokWydania, @Ilosc)", Parameters);
 
-            try
+            if (result > 0)
             {
-                MySqlCommand sqlCmd = new MySqlCommand();
-                sqlCmd.Connection = sqlCon;
+                ksiazkiTytul.Text = "";
+                ksiazkiAutor.Text = "";
+                ksiazkiGatunek.Text = "";
+                ksiazkiIsbn.Text = "";
+                ksiazkiRok.Text = "";
+                ksiazkiIlosc.Text = "";
 
-                sqlCmd.CommandText = "Update Ksiazkitbl set Tytul=@Tytul, Autor=@Autor, Gatunek=@Gatunek, ISBN=@ISBN, RokWydania=@RokWydania, Ilosc=@Ilosc where idKsiazki=@idKsiazki";
-
-                sqlCmd.CommandType = CommandType.Text;
-                sqlCmd.Parameters.AddWithValue("@idKsiazki", i);
-                sqlCmd.Parameters.AddWithValue("@Tytul", ksiazkiTytul.Text);
-                sqlCmd.Parameters.AddWithValue("@Autor", ksiazkiAutor.Text);
-                sqlCmd.Parameters.AddWithValue("@Gatunek", ksiazkiGatunek.Text);
-                sqlCmd.Parameters.AddWithValue("@ISBN", ksiazkiIsbn.Text);
-                sqlCmd.Parameters.AddWithValue("@RokWydania", ksiazkiRok.Text);
-                sqlCmd.Parameters.AddWithValue("@Ilosc", ksiazkiIlosc.Text);
-
-                sqlCmd.ExecuteNonQuery();
-                sqlCon.Close();
-                upLoadData();
-
+                MessageBox.Show("Pomyślnie dodano nową książke");
             }
-            catch (Exception ex)
+
+            loadData();
+        }
+
+        private void edit(object sender, EventArgs e)
+        {
+            Database db = new Database();
+
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("Tytul", ksiazkiTytul.Text);
+            Parameters.Add("Autor", ksiazkiAutor.Text);
+            Parameters.Add("Gatunek", ksiazkiGatunek.Text);
+            Parameters.Add("ISBN", ksiazkiIsbn.Text);
+            Parameters.Add("RokWydania", ksiazkiRok.Text);
+            Parameters.Add("Ilosc", ksiazkiIlosc.Text);
+            Parameters.Add("id", currentEdit);
+
+            int result = db.Exec("UPDATE Ksiazki SET Tytul=@Tytul, Autor=@Autor, Gatunek=@Gatunek, ISBN=@ISBN, RokWydania=@RokWydania, Ilosc=@Ilosc WHERE idKsiazki=@id", Parameters);
+
+            if (result > 0)
             {
-                MessageBox.Show(ex.Message);
+                ksiazkiTytul.Text = "";
+                ksiazkiAutor.Text = "";
+                ksiazkiGatunek.Text = "";
+                ksiazkiIsbn.Text = "";
+                ksiazkiRok.Text = "";
+                ksiazkiIlosc.Text = "";
+
+                MessageBox.Show("Pomyślnie zapisano zmiany dla wskazanej książki");
             }
+
+            loadData();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            i = Convert.ToInt32(widokKsiazki.SelectedRows[0].Cells[0].Value);
+            Database db = new Database();
 
-            sqlCon.ConnectionString = "server=" + server + ";" + "user id=" + username + ";" + "password=" + password + ";" + "database=" + database;
+            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+            Parameters.Add("id", currentEdit);
 
+            int result = db.Exec("DELETE FROM Ksiazki WHERE idKsiazki=@id", Parameters);
 
-
-            sqlCon.Open();
-            sqlQuery = "delete from Ksiazkitbl where idKsiazki=@idKsiazki";
-
-            sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
-            sqlCmd.Parameters.AddWithValue("@idKsiazki", i);
-
-            sqlCmd.ExecuteNonQuery();
-            sqlCon.Close();
-
-            foreach (DataGridViewRow item in this.widokKsiazki.SelectedRows)
+            if (result > 0)
             {
-                widokKsiazki.Rows.RemoveAt(item.Index);
+                MessageBox.Show("Książka została usunięta");
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się usunąć książki");
             }
 
-
-
-            upLoadData();
+            hideForm(this, null);
+            loadData();
 
         }
 
         private void widokKsiazki_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void hideForm(object sender, EventArgs e)
+        {
+            labelTytul.Visible = false;
+            ksiazkiTytul.Visible = false;
+            ksiazkiTytul.Text = "";
+
+            labelAutor.Visible = false;
+            ksiazkiAutor.Visible = false;
+            ksiazkiAutor.Text = "";
+
+            labelGatunek.Visible = false;
+            ksiazkiGatunek.Visible = false;
+            ksiazkiGatunek.Text = "";
+
+            labelIsbn.Visible = false;
+            ksiazkiIsbn.Visible = false;
+            ksiazkiIsbn.Text = "";
+
+            labelRok.Visible = false;
+            ksiazkiRok.Visible = false;
+            ksiazkiRok.Text = "";
+
+            labelIlosc.Visible = false;
+            ksiazkiIlosc.Visible = false;
+            ksiazkiIlosc.Text = "";
+
+            ksiazkiActionButton.Visible = false;
         }
     }
 }
