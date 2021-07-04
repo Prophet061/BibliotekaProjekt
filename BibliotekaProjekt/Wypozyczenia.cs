@@ -166,24 +166,56 @@ namespace BibliotekaProjekt
 
             MySqlDataReader query = db_q.Query2("SELECT * FROM Wypozyczenia WHERE idWypozyczenia=@idWypozyczenia", Parameters_query);
             DateTime dataWypozyczenia = new DateTime();
-            while (query.Read())
+            try
             {
-                DateTime now = DateTime.Now;
-                dataWypozyczenia = DateTime.Parse(query["dataWypozyczenia"].ToString()).AddDays(14);
-
-                int compare = DateTime.Compare(dataWypozyczenia, now);
-
-                if(compare < 0)
+                while (query.Read())
                 {
-                    int difference = Convert.ToInt32((dataWypozyczenia - now).TotalDays);
-                    if(difference < 0)
+                    DateTime now = DateTime.Now;
+                    dataWypozyczenia = DateTime.Parse(query["dataWypozyczenia"].ToString()).AddDays(14);
+
+                    int compare = DateTime.Compare(dataWypozyczenia, now);
+
+                    if (compare < 0)
                     {
-                        difference = difference * -1;
+                        int difference = Convert.ToInt32((dataWypozyczenia - now).TotalDays);
+                        if (difference < 0)
+                        {
+                            difference = difference * -1;
+                        }
+
+
+                        DialogResult dialogResult = MessageBox.Show("Podana książka została oddana po terminie zwrotu. Wymagane jest pobranie opłaty w wysokości: " + (cenaZaDzien * difference) + " eurogąbek za spóźnienie " + difference + " dni", "Wymagana opłata", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            Database db_e = new Database();
+                            Dictionary<string, string> Parameters_exec = new Dictionary<string, string>();
+                            Parameters_exec.Add("Tytul", ksiazka);
+
+                            db_e.Exec("UPDATE Ksiazki SET Ilosc=Ilosc+1 WHERE Tytul=@Tytul", Parameters_exec);
+                            db_e.Close();
+
+
+                            Database db = new Database();
+                            Dictionary<string, string> Parameters = new Dictionary<string, string>();
+                            Parameters.Add("Osoba", this.getUserId().ToString());
+                            Parameters.Add("Id", idWypozyczenie.ToString());
+
+                            db.Exec("UPDATE Wypozyczenia SET osobaOdbierajaca=@Osoba, dataOdbioru=current_date() WHERE idWypozyczenia=@Id", Parameters);
+                            db.Close();
+
+                            MessageBox.Show("Książka została zwrócona");
+
+                            db_q.Close();
+
+                            loadData();
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            db_q.Close();
+                        }
+
                     }
-
-
-                    DialogResult dialogResult = MessageBox.Show("Podana książka została oddana po terminie zwrotu. Wymagane jest pobranie opłaty w wysokości: "+(cenaZaDzien * difference)+" eurogąbek za spóźnienie "+difference+" dni", "Wymagana opłata", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
+                    else
                     {
                         Database db_e = new Database();
                         Dictionary<string, string> Parameters_exec = new Dictionary<string, string>();
@@ -203,37 +235,14 @@ namespace BibliotekaProjekt
 
                         MessageBox.Show("Książka została zwrócona");
 
-                        db_q.Close();
-
                         loadData();
                     }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        db_q.Close();
-                    }
-
-                } else
-                {
-                    Database db_e = new Database();
-                    Dictionary<string, string> Parameters_exec = new Dictionary<string, string>();
-                    Parameters_exec.Add("Tytul", ksiazka);
-
-                    db_e.Exec("UPDATE Ksiazki SET Ilosc=Ilosc+1 WHERE Tytul=@Tytul", Parameters_exec);
-                    db_e.Close();
-
-
-                    Database db = new Database();
-                    Dictionary<string, string> Parameters = new Dictionary<string, string>();
-                    Parameters.Add("Osoba", this.getUserId().ToString());
-                    Parameters.Add("Id", idWypozyczenie.ToString());
-
-                    db.Exec("UPDATE Wypozyczenia SET osobaOdbierajaca=@Osoba, dataOdbioru=current_date() WHERE idWypozyczenia=@Id", Parameters);
-                    db.Close();
-
-                    MessageBox.Show("Książka została zwrócona");
-
-                    loadData();
                 }
+
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
             }
 
             query.Close();

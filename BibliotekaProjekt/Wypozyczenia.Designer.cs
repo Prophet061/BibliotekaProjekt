@@ -56,7 +56,6 @@ namespace BibliotekaProjekt
             // 
             this.widokWypozyczenia.AllowUserToAddRows = false;
             this.widokWypozyczenia.AllowUserToDeleteRows = false;
-            this.widokWypozyczenia.AllowUserToOrderColumns = true;
             this.widokWypozyczenia.AllowUserToResizeColumns = false;
             this.widokWypozyczenia.AllowUserToResizeRows = false;
             this.widokWypozyczenia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -64,8 +63,13 @@ namespace BibliotekaProjekt
             this.widokWypozyczenia.MultiSelect = false;
             this.widokWypozyczenia.Name = "widokWypozyczenia";
             this.widokWypozyczenia.ReadOnly = true;
+            this.widokWypozyczenia.RowHeadersVisible = false;
             this.widokWypozyczenia.RowTemplate.Height = 25;
             this.widokWypozyczenia.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.widokWypozyczenia.ShowCellErrors = false;
+            this.widokWypozyczenia.ShowCellToolTips = false;
+            this.widokWypozyczenia.ShowEditingIcon = false;
+            this.widokWypozyczenia.ShowRowErrors = false;
             this.widokWypozyczenia.Size = new System.Drawing.Size(506, 389);
             this.widokWypozyczenia.TabIndex = 37;
             // 
