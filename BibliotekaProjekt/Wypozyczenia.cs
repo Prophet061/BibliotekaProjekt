@@ -42,7 +42,7 @@ namespace BibliotekaProjekt
 
             sqlCon.Open();
             sqlCmd.Connection = sqlCon;
-            sqlCmd.CommandText = "SELECT * FROM Wypozyczeniatbl";
+            sqlCmd.CommandText = "SELECT * FROM Wypozyczenia";
             sqlRead = sqlCmd.ExecuteReader();
             sqlDt.Load(sqlRead);
             sqlRead.Close();
@@ -91,7 +91,7 @@ namespace BibliotekaProjekt
 
 
             sqlCon.Open();
-            sqlQuery = "delete from Wypozyczeniatbl where idWypozyczenia=@idWypozyczenia";
+            sqlQuery = "delete from Wypozyczenia where idWypozyczenia=@idWypozyczenia";
 
             sqlCmd = new MySqlCommand(sqlQuery, sqlCon);
             sqlCmd.Parameters.AddWithValue("@idWypozyczenia", i);
@@ -126,7 +126,7 @@ namespace BibliotekaProjekt
                 MySqlCommand sqlCmd = new MySqlCommand();
                 sqlCmd.Connection = sqlCon;
 
-                sqlCmd.CommandText = "Update Wypozyczeniatbl set idKsiazka=@idKsiazka, idCzytelnik=@idCzytelnik, osobaWypozyczajaca=@osobaWypozyczajaca, osobaOdbierajaca=@osobaOdbierajaca, dataWypozyczenia=@dataWypozyczenia, dataOdbioru=@dataOdbioru where idWypozyczenia=@idWypozyczenia";
+                sqlCmd.CommandText = "Update Wypozyczenia set idKsiazka=@idKsiazka, idCzytelnik=@idCzytelnik, osobaWypozyczajaca=@osobaWypozyczajaca, osobaOdbierajaca=@osobaOdbierajaca, dataWypozyczenia=@dataWypozyczenia, dataOdbioru=@dataOdbioru where idWypozyczenia=@idWypozyczenia";
 
                 sqlCmd.CommandType = CommandType.Text;
                 sqlCmd.Parameters.AddWithValue("@idWypozyczenia", i);
@@ -158,7 +158,7 @@ namespace BibliotekaProjekt
             try
             {
                 sqlCon.Open();
-                sqlQuery = "insert into Wypozyczeniatbl (idKsiazka, idCzytelnik, osobaWypozyczajaca, osobaOdbierajaca, dataWypozyczenia, dataOdbioru)" +
+                sqlQuery = "insert into Wypozyczenia (idKsiazka, idCzytelnik, osobaWypozyczajaca, osobaOdbierajaca, dataWypozyczenia, dataOdbioru)" +
                 "values('" + idKsiazki.Text + "', '" + idCzytelnika.Text + "', '" +
                 osobaWyp.Text + "','" + osobaOdb.Text + "','" + this.dataWyp.Text + "','" + this.dataOdb.Text + "')";
 

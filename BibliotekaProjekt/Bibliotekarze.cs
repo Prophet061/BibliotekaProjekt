@@ -246,7 +246,10 @@ namespace BibliotekaProjekt
             bibliotekarzActionButton.Click += new System.EventHandler(edit);
         }
 
-        
+        private void widokBibliotekarze_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 

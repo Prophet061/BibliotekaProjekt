@@ -244,5 +244,10 @@ namespace BibliotekaProjekt
 
             ksiazkiActionButton.Visible = false;
         }
+
+        private void ksiazkiActionButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -119,6 +119,7 @@ namespace BibliotekaProjekt
             this.widokBibliotekarze.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.widokBibliotekarze.Size = new System.Drawing.Size(506, 343);
             this.widokBibliotekarze.TabIndex = 37;
+            this.widokBibliotekarze.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.widokBibliotekarze_CellContentClick);
             // 
             // bibliotekarzActionButton
             // 

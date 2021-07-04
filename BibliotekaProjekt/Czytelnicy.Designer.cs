@@ -47,7 +47,7 @@ namespace BibliotekaProjekt
             // 
             this.labelImie.AutoSize = true;
             this.labelImie.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelImie.Location = new System.Drawing.Point(21, 236);
+            this.labelImie.Location = new System.Drawing.Point(21, 208);
             this.labelImie.Name = "labelImie";
             this.labelImie.Size = new System.Drawing.Size(32, 17);
             this.labelImie.TabIndex = 1;
@@ -58,7 +58,7 @@ namespace BibliotekaProjekt
             // 
             this.labelNazwisko.AutoSize = true;
             this.labelNazwisko.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelNazwisko.Location = new System.Drawing.Point(21, 296);
+            this.labelNazwisko.Location = new System.Drawing.Point(21, 261);
             this.labelNazwisko.Name = "labelNazwisko";
             this.labelNazwisko.Size = new System.Drawing.Size(63, 17);
             this.labelNazwisko.TabIndex = 2;
@@ -69,7 +69,7 @@ namespace BibliotekaProjekt
             // 
             this.labelTelefon.AutoSize = true;
             this.labelTelefon.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTelefon.Location = new System.Drawing.Point(21, 356);
+            this.labelTelefon.Location = new System.Drawing.Point(21, 314);
             this.labelTelefon.Name = "labelTelefon";
             this.labelTelefon.Size = new System.Drawing.Size(99, 17);
             this.labelTelefon.TabIndex = 3;
@@ -78,9 +78,9 @@ namespace BibliotekaProjekt
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(632, 409);
+            this.button1.Location = new System.Drawing.Point(632, 361);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(240, 40);
+            this.button1.Size = new System.Drawing.Size(240, 35);
             this.button1.TabIndex = 4;
             this.button1.Text = "Usuń czytelnika";
             this.button1.UseVisualStyleBackColor = true;
@@ -88,9 +88,9 @@ namespace BibliotekaProjekt
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(366, 409);
+            this.button2.Location = new System.Drawing.Point(366, 361);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(240, 40);
+            this.button2.Size = new System.Drawing.Size(240, 35);
             this.button2.TabIndex = 5;
             this.button2.Text = "Dodaj czytelnika";
             this.button2.UseVisualStyleBackColor = true;
@@ -98,13 +98,14 @@ namespace BibliotekaProjekt
             // 
             // czytelnikActionButton
             // 
-            this.czytelnikActionButton.Location = new System.Drawing.Point(21, 409);
+            this.czytelnikActionButton.Location = new System.Drawing.Point(21, 361);
             this.czytelnikActionButton.Name = "czytelnikActionButton";
-            this.czytelnikActionButton.Size = new System.Drawing.Size(240, 40);
+            this.czytelnikActionButton.Size = new System.Drawing.Size(240, 35);
             this.czytelnikActionButton.TabIndex = 6;
             this.czytelnikActionButton.Text = "Dodaj";
             this.czytelnikActionButton.UseVisualStyleBackColor = true;
             this.czytelnikActionButton.Visible = false;
+            this.czytelnikActionButton.Click += new System.EventHandler(this.czytelnikActionButton_Click);
             // 
             // widokCzytelnicy
             // 
@@ -115,7 +116,7 @@ namespace BibliotekaProjekt
             this.widokCzytelnicy.AllowUserToResizeRows = false;
             this.widokCzytelnicy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.widokCzytelnicy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.widokCzytelnicy.Location = new System.Drawing.Point(366, 14);
+            this.widokCzytelnicy.Location = new System.Drawing.Point(366, 12);
             this.widokCzytelnicy.MultiSelect = false;
             this.widokCzytelnicy.Name = "widokCzytelnicy";
             this.widokCzytelnicy.ReadOnly = true;
@@ -126,15 +127,15 @@ namespace BibliotekaProjekt
             this.widokCzytelnicy.ShowCellToolTips = false;
             this.widokCzytelnicy.ShowEditingIcon = false;
             this.widokCzytelnicy.ShowRowErrors = false;
-            this.widokCzytelnicy.Size = new System.Drawing.Size(506, 389);
+            this.widokCzytelnicy.Size = new System.Drawing.Size(506, 343);
             this.widokCzytelnicy.TabIndex = 7;
             // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(21, 12);
+            this.button4.Location = new System.Drawing.Point(21, 11);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(240, 40);
+            this.button4.Size = new System.Drawing.Size(240, 35);
             this.button4.TabIndex = 9;
             this.button4.Text = "Powrót";
             this.button4.UseVisualStyleBackColor = true;
@@ -142,34 +143,34 @@ namespace BibliotekaProjekt
             // 
             // czytelnikImie
             // 
-            this.czytelnikImie.Location = new System.Drawing.Point(21, 256);
+            this.czytelnikImie.Location = new System.Drawing.Point(21, 226);
             this.czytelnikImie.Name = "czytelnikImie";
-            this.czytelnikImie.Size = new System.Drawing.Size(240, 25);
+            this.czytelnikImie.Size = new System.Drawing.Size(240, 23);
             this.czytelnikImie.TabIndex = 11;
             this.czytelnikImie.Visible = false;
             // 
             // czytelnikNazwisko
             // 
-            this.czytelnikNazwisko.Location = new System.Drawing.Point(21, 318);
+            this.czytelnikNazwisko.Location = new System.Drawing.Point(21, 281);
             this.czytelnikNazwisko.Name = "czytelnikNazwisko";
-            this.czytelnikNazwisko.Size = new System.Drawing.Size(240, 25);
+            this.czytelnikNazwisko.Size = new System.Drawing.Size(240, 23);
             this.czytelnikNazwisko.TabIndex = 12;
             this.czytelnikNazwisko.Visible = false;
             // 
             // czytelnikTel
             // 
-            this.czytelnikTel.Location = new System.Drawing.Point(21, 378);
+            this.czytelnikTel.Location = new System.Drawing.Point(21, 334);
             this.czytelnikTel.Name = "czytelnikTel";
-            this.czytelnikTel.Size = new System.Drawing.Size(240, 25);
+            this.czytelnikTel.Size = new System.Drawing.Size(240, 23);
             this.czytelnikTel.TabIndex = 13;
             this.czytelnikTel.Visible = false;
             // 
             // Czytelnicy
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(884, 461);
+            this.ClientSize = new System.Drawing.Size(884, 407);
             this.Controls.Add(this.czytelnikTel);
             this.Controls.Add(this.czytelnikNazwisko);
             this.Controls.Add(this.czytelnikImie);
@@ -181,8 +182,8 @@ namespace BibliotekaProjekt
             this.Controls.Add(this.labelTelefon);
             this.Controls.Add(this.labelNazwisko);
             this.Controls.Add(this.labelImie);
-            this.MaximumSize = new System.Drawing.Size(900, 500);
-            this.MinimumSize = new System.Drawing.Size(900, 500);
+            this.MaximumSize = new System.Drawing.Size(900, 446);
+            this.MinimumSize = new System.Drawing.Size(900, 446);
             this.Name = "Czytelnicy";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Czytelnicy";
