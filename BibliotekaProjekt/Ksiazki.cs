@@ -13,6 +13,17 @@ namespace BibliotekaProjekt
     {
         string currentEdit;
 
+        private int UserId = 0;
+
+        public void setUserId(int id)
+        {
+            UserId = id;
+        }
+
+        public int getUserId()
+        {
+            return UserId;
+        }
         public Ksiazki()
         {
             InitializeComponent();
@@ -56,6 +67,7 @@ namespace BibliotekaProjekt
         private void button4_Click(object sender, EventArgs e)
         {
             StronaGlowna stronaglowna = new StronaGlowna();
+            stronaglowna.setUserId(this.getUserId());
             stronaglowna.Show();
             this.Hide();
         }

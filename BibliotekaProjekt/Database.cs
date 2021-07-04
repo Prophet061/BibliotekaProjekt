@@ -17,7 +17,7 @@ namespace BibliotekaProjekt
         private MySqlConnection sqlCon = new MySqlConnection();
         private MySqlCommand sqlCmd = new MySqlCommand();
         private DataTable sqlDt = new DataTable();
-        private MySqlDataReader sqlRead;
+        private MySqlDataReader sqlReader;
 
         public DataTable Query(string query, IDictionary Parameters)
         {
@@ -34,12 +34,38 @@ namespace BibliotekaProjekt
                     sqlCmd.Parameters.AddWithValue("@" + data.Key, data.Value);
                 }
 
-                sqlRead = sqlCmd.ExecuteReader();
-                sqlDt.Load(sqlRead);
-                sqlRead.Close();
+                sqlReader = sqlCmd.ExecuteReader();
+                sqlDt.Load(sqlReader);
+                sqlReader.Close();
                 sqlCon.Close();
 
                 return sqlDt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return null;
+        }
+
+        public MySqlDataReader Query2(string query, IDictionary Parameters)
+        {
+
+            try
+            {
+                sqlCon.ConnectionString = "Server=" + host + "; Database=" + name + "; Uid=" + user + ";" + "Pwd=" + password + "; convert zero datetime=True";
+                sqlCon.Open();
+                sqlCmd.Connection = sqlCon;
+
+                sqlCmd.CommandText = query;
+                foreach (DictionaryEntry data in Parameters)
+                {
+                    sqlCmd.Parameters.AddWithValue("@" + data.Key, data.Value);
+                }
+
+                sqlReader = sqlCmd.ExecuteReader();
+                return sqlReader;
             }
             catch (Exception ex)
             {
@@ -75,6 +101,18 @@ namespace BibliotekaProjekt
             }
 
             return 0;
+        }
+
+        public void Close()
+        {
+            try
+            {
+                sqlCon.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         ~Database()

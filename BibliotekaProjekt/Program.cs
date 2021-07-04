@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 
 namespace BibliotekaProjekt
-{
+{   
     static class Program
     {
         /// <summary>
@@ -11,10 +11,11 @@ namespace BibliotekaProjekt
         [STAThread]
         static void Main()
         {
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Ksiazki());
+            Application.Run(new Login());
         }
     }
 }

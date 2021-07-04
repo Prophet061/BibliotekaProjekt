@@ -35,7 +35,7 @@ namespace BibliotekaProjekt
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            this.setUserId(0);
             Login login = new Login();
             login.Show();
             this.Hide();
@@ -45,6 +45,7 @@ namespace BibliotekaProjekt
         private void button1_Click(object sender, EventArgs e)
         {
             Czytelnicy czytelnicy = new Czytelnicy();
+            czytelnicy.setUserId(this.getUserId());
             czytelnicy.Show();
             this.Hide();
         }
@@ -52,6 +53,7 @@ namespace BibliotekaProjekt
         private void button7_Click(object sender, EventArgs e)
         {
             Wypozyczenia wypozyczenia = new Wypozyczenia();
+            wypozyczenia.setUserId(this.getUserId());
             wypozyczenia.Show();
             this.Hide();
         }
@@ -59,6 +61,7 @@ namespace BibliotekaProjekt
         private void button3_Click(object sender, EventArgs e)
         {
             Bibliotekarze bibliotekarze = new Bibliotekarze();
+            bibliotekarze.setUserId(this.getUserId());
             bibliotekarze.Show();
             this.Hide();
         }
@@ -66,13 +69,9 @@ namespace BibliotekaProjekt
         private void button2_Click(object sender, EventArgs e)
         {
             Ksiazki ksiazki = new Ksiazki();
+            ksiazki.setUserId(this.getUserId());
             ksiazki.Show();
             this.Hide();
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
